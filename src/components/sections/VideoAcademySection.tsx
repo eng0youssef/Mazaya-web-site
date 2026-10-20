@@ -1,156 +1,204 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import Image from "next/image";
 import { 
   Play, 
   Youtube, 
   Clock, 
   Sparkles, 
-  CheckCircle,
-  ExternalLink
+  Search, 
+  ExternalLink,
+  Tag,
+  Dumbbell,
+  CheckCircle2,
+  FolderOpen
 } from "lucide-react";
-import { VIDEO_TUTORIALS, VideoTutorial } from "@/data/mazaya-data";
+import { 
+  VIDEO_TUTORIALS, 
+  VIDEO_CATEGORIES, 
+  VideoTutorial, 
+  VideoCategory 
+} from "@/data/mazaya-data";
 import VideoModal from "@/components/ui/VideoModal";
 
-type FilterCategory = "all" | "sales" | "inventory" | "treasury" | "reports";
-
 export default function VideoAcademySection() {
-  const [activeTab, setActiveTab] = useState<FilterCategory>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedVideo, setSelectedVideo] = useState<VideoTutorial | null>(null);
 
-  const filteredVideos = activeTab === "all"
-    ? VIDEO_TUTORIALS
-    : VIDEO_TUTORIALS.filter((v) => v.category === activeTab);
+  // Filter videos by category and search query
+  const filteredVideos = useMemo(() => {
+    return VIDEO_TUTORIALS.filter((video) => {
+      const matchesCategory = 
+        activeCategory === "all" || video.category === activeCategory;
+      
+      const matchesSearch = 
+        searchQuery.trim() === "" ||
+        video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        video.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (video.code && video.code.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
     <section id="video-academy" className="py-16 lg:py-24 bg-white relative border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0F7FB] border border-[#0A507A]/15 shadow-soft">
             <Youtube className="w-4 h-4 text-rose-600" />
             <span className="text-xs font-bold text-[#0A507A]">
-              شروحات فيديو تفصيلية على قناتنا الرسمية
+              أكاديمية تدريب وشروحات مزايا الرسمية
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-            اتفرج على السيستم بنفسك — مكتبة شروحات فيديو متكاملة
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 leading-tight">
+            اتفرج على السيستم بنفسك — مكتبة شروحات فيديو تفصيلية
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            مش بنسيبك لوحدك بعد الشراء؛ جهزنالك فيديوهات شرح تفصيلية على قناتنا في يوتيوب لكل شاشة في البرنامج عشان تدرب نفسك وموظفينك بسهولة وفي أي وقت.
+            مش بنسيبك لوحدك بعد الشراء؛ جهزنالك مكتبة فيديو كاملة مقسمة لكل شاشة وخطوة في <strong>مزايا ماكس</strong> ونظام <strong>مزايا جيم</strong> عشان تدرب نفسك وموظفينك بكل سهولة.
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          {[
-            { id: "all", label: "الكل" },
-            { id: "sales", label: "شرح المبيعات والكاشير" },
-            { id: "inventory", label: "المخازن والجرد" },
-            { id: "treasury", label: "الخزنة والحسابات" },
-            { id: "reports", label: "الربط والتقارير" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as FilterCategory)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                activeTab === tab.id
-                  ? "bg-[#0A507A] text-white shadow-soft"
-                  : "bg-slate-100 hover:bg-slate-200 text-slate-700"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Video Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredVideos.map((video) => (
-            <div
-              key={video.id}
-              onClick={() => setSelectedVideo(video)}
-              className="group bg-[#F8FAFC] rounded-3xl border border-slate-200/90 shadow-soft hover:shadow-xl hover:border-[#0A507A]/40 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between"
-            >
-              {/* Video Thumbnail Simulator */}
-              <div className="relative aspect-video bg-gradient-to-tr from-[#06324D] to-[#0A507A] p-4 flex flex-col justify-between overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-                
-                {/* Duration Badge & Category Tag */}
-                <div className="relative z-10 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold">
-                    {video.categoryLabel}
-                  </span>
-                  <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-black/60 text-white text-[11px] font-mono">
-                    <Clock className="w-3 h-3 text-[#F2C12E]" />
-                    <span>{video.duration}</span>
-                  </div>
-                </div>
-
-                {/* Center Glowing Play Button */}
-                <div className="relative z-10 self-center my-auto">
-                  <div className="w-14 h-14 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-gold group-hover:scale-115 transition-transform">
-                    <Play className="w-6 h-6 fill-current ms-1" />
-                  </div>
-                </div>
-
-                {/* Subtitle brand tag */}
-                <div className="relative z-10 flex items-center justify-between text-[11px] text-slate-300">
-                  <span>مزايا للبرمجيات 🇪🇬</span>
-                  <span className="text-[#F2C12E]">اضغط للمشاهدة الآن</span>
-                </div>
-              </div>
-
-              {/* Card Text Content */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#0A507A] transition-colors leading-snug mb-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                    {video.description}
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs text-[#0A507A] font-bold">
-                  <span>شاهد الشرح المباشر</span>
-                  <span className="text-slate-400 group-hover:text-[#0A507A] group-hover:-translate-x-1 transition-transform">
-                    ←
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Subscribe / YouTube Channel Bar */}
-        <div className="mt-12 p-6 rounded-2xl bg-[#F0F7FB] border border-[#0A507A]/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center flex-shrink-0 shadow-soft">
-              <Youtube className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-bold text-sm text-slate-900">
-                قناة مزايا للبرمجيات الرسمية على يوتيوب
-              </h4>
-              <p className="text-xs text-slate-600">
-                ننشر دورياً فيديوهات تدريبية، نصائح لحماية المخازن، وتحديثات برامج نقاط البيع والـ ERP.
-              </p>
-            </div>
+        {/* Search Bar & Playlist Quick Link */}
+        <div className="max-w-2xl mx-auto mb-8 flex flex-col sm:flex-row items-center gap-3">
+          <div className="relative flex-1 w-full">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="ابحث عن أي شاشة أو موضوع (مثال: الباركود، المخازن، التقسيط، الخزينة)..."
+              className="w-full ps-11 pe-4 py-3 rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-[#F8FAFC]"
+            />
+            <Search className="w-4 h-4 text-slate-400 absolute start-4 top-1/2 -translate-y-1/2" />
           </div>
+
           <a
-            href="https://youtube.com"
+            href="https://youtube.com/playlist?list=PLWpefE81eeVnRxdyuefLwACAH4bdOhXX6"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs border border-slate-200 shadow-soft transition"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs border border-rose-200 transition shadow-soft flex-shrink-0"
           >
-            <span>اشترك في القناة</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+            <Youtube className="w-4 h-4 text-rose-600" />
+            <span>البلاي ليست كاملة على يوتيوب</span>
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
+
+        {/* Category Tabs Filter */}
+        <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none text-xs">
+          {VIDEO_CATEGORIES.map((tab) => {
+            const count = tab.id === "all" 
+              ? VIDEO_TUTORIALS.length 
+              : VIDEO_TUTORIALS.filter((v) => v.category === tab.id).length;
+
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveCategory(tab.id)}
+                className={`px-3.5 py-2 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 ${
+                  activeCategory === tab.id
+                    ? "bg-[#0A507A] text-white shadow-soft"
+                    : "bg-slate-100 hover:bg-slate-200 text-slate-700"
+                }`}
+              >
+                <span>{tab.label}</span>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                  activeCategory === tab.id
+                    ? "bg-white/20 text-white"
+                    : "bg-slate-200/80 text-slate-600"
+                }`}>
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+
+        {/* Video Cards Grid */}
+        {filteredVideos.length === 0 ? (
+          <div className="py-16 text-center space-y-3">
+            <FolderOpen className="w-12 h-12 text-slate-300 mx-auto" />
+            <h4 className="font-bold text-slate-700">لم يتم العثور على فيديوهات مطابقة</h4>
+            <p className="text-xs text-slate-500">جرب البحث بكلمة أخرى أو اختر تصنيفاً مختلفاً.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredVideos.map((video) => (
+              <div
+                key={video.id}
+                onClick={() => setSelectedVideo(video)}
+                className="group bg-[#F8FAFC] rounded-3xl border border-slate-200/90 shadow-soft hover:shadow-xl hover:border-[#0A507A]/40 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between"
+              >
+                {/* Video Thumbnail with Real YouTube HQ Image */}
+                <div className="relative aspect-video bg-slate-900 overflow-hidden">
+                  <Image
+                    src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                    alt={video.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 group-hover:opacity-100"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+
+                  {/* Top Overlay Badges */}
+                  <div className="absolute top-3 start-3 end-3 flex items-center justify-between z-10 pointer-events-none">
+                    {video.code ? (
+                      <span className="px-2.5 py-0.5 rounded-lg bg-[#0A507A]/90 text-white font-mono font-bold text-xs backdrop-blur-sm shadow-xs">
+                        {video.code}
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded-lg bg-[#F2C12E] text-slate-900 font-bold text-[11px] shadow-xs">
+                        فيديو مخصص
+                      </span>
+                    )}
+
+                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-black/70 text-white text-[11px] font-mono backdrop-blur-sm">
+                      <Clock className="w-3 h-3 text-[#F2C12E]" />
+                      <span>{video.duration}</span>
+                    </div>
+                  </div>
+
+                  {/* Center Play Button Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                    <div className="w-13 h-13 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-gold group-hover:scale-115 transition-transform">
+                      <Play className="w-6 h-6 fill-current ms-0.5" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Info */}
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[11px] font-semibold text-[#0A507A] bg-[#0A507A]/10 px-2 py-0.5 rounded-md">
+                        {video.categoryLabel}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#0A507A] transition-colors leading-snug line-clamp-2">
+                      {video.title}
+                    </h3>
+
+                    <p className="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2">
+                      {video.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-bold text-[#0A507A]">
+                    <span>تشغيل الفيديو الآن</span>
+                    <span className="group-hover:-translate-x-1 transition-transform">←</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
       </div>
 

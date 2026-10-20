@@ -144,7 +144,11 @@ export default function SystemDetailPage({ params }: PageProps) {
   }
 
   // Related videos
-  const relatedVideos = VIDEO_TUTORIALS.slice(0, 3);
+  const relatedVideos = currentModule.slug === "mazaya-gym"
+    ? VIDEO_TUTORIALS.filter((v) => v.category === "gym")
+    : currentModule.slug === "mazaya-max"
+    ? VIDEO_TUTORIALS.filter((v) => v.category === "sales" || v.category === "inventory" || v.category === "basic").slice(0, 6)
+    : [];
 
   return (
     <div className="w-full bg-[#F8FAFC]">
@@ -311,31 +315,54 @@ export default function SystemDetailPage({ params }: PageProps) {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {relatedVideos.map((video) => (
-              <div
-                key={video.id}
-                className="bg-[#F8FAFC] rounded-2xl border border-slate-200 overflow-hidden shadow-soft"
-              >
-                <div className="aspect-video bg-gradient-to-tr from-[#06324D] to-[#0A507A] flex items-center justify-center relative">
-                  <div className="w-12 h-12 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-gold">
-                    <Play className="w-5 h-5 fill-current ms-0.5" />
+          {relatedVideos.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedVideos.map((video) => (
+                <div
+                  key={video.id}
+                  className="bg-[#F8FAFC] rounded-2xl border border-slate-200 overflow-hidden shadow-soft"
+                >
+                  <div className="aspect-video bg-gradient-to-tr from-[#06324D] to-[#0A507A] flex items-center justify-center relative">
+                    <div className="w-12 h-12 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-gold">
+                      <Play className="w-5 h-5 fill-current ms-0.5" />
+                    </div>
+                    <span className="absolute bottom-2 end-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-mono">
+                      {video.duration}
+                    </span>
                   </div>
-                  <span className="absolute bottom-2 end-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-mono">
-                    {video.duration}
-                  </span>
+                  <div className="p-4">
+                    <h4 className="font-bold text-xs sm:text-sm text-slate-900 line-clamp-2">
+                      {video.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                      {video.description}
+                    </p>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h4 className="font-bold text-xs sm:text-sm text-slate-900 line-clamp-2">
-                    {video.title}
-                  </h4>
-                  <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                    {video.description}
-                  </p>
-                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 sm:p-10 rounded-3xl bg-[#F0F7FB] border border-[#0A507A]/15 text-center space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-white text-[#0A507A] flex items-center justify-center mx-auto shadow-soft">
+                <Play className="w-6 h-6 text-[#F2C12E]" />
               </div>
-            ))}
-          </div>
+              <h4 className="font-bold text-base sm:text-lg text-slate-800">
+                شروحات فيديو نظام {currentModule.title} جاري تجهيزها وتسجيلها حالياً
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                مهندسو الدعم الفني في مزايا جاهزون لتقديم جلسة تدريب وشرح مباشر (عن بُعد أو حضورياً) لك ولموظفيك لمعاينة النظام وتجربته فورياً.
+              </p>
+              <div className="pt-2">
+                <Link
+                  href="/#lead-capture"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-xs shadow-soft transition"
+                >
+                  <span>طلب جلسة تدريب وديمو مباشر</span>
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          )}
 
         </div>
       </section>
