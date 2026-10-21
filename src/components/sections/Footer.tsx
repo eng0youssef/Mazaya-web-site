@@ -74,6 +74,17 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
+
+            <div className="pt-2 border-t border-slate-200/80">
+              <Link
+                href="/videos"
+                className="text-xs font-bold text-[#0A507A] hover:text-[#06324D] transition inline-flex items-center gap-1.5 py-1"
+              >
+                <Youtube className="w-3.5 h-3.5 text-rose-600" />
+                <span>مكتبة شروحات الفيديو والتدريب</span>
+                <ArrowLeft className="w-3 h-3 text-[#F2C12E]" />
+              </Link>
+            </div>
           </div>
 
           {/* Contact & Support (4 cols) */}

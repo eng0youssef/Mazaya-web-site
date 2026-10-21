@@ -307,7 +307,7 @@ export default function SystemDetailPage({ params }: PageProps) {
               </p>
             </div>
             <Link
-              href="/#video-academy"
+              href="/videos"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A507A] hover:underline"
             >
               <span>مشاهدة كل الفيديوهات</span>

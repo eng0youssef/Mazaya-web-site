@@ -91,7 +91,7 @@ export default function VideoAcademySection() {
         </div>
 
         {/* Category Tabs Filter */}
-        <div className="flex items-center justify-start lg:justify-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none text-xs">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs max-w-5xl mx-auto px-2">
           {VIDEO_CATEGORIES.map((tab) => {
             const count = tab.id === "all" 
               ? VIDEO_TUTORIALS.length 
@@ -101,14 +101,14 @@ export default function VideoAcademySection() {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`px-3.5 py-2 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 ${
+                className={`px-3.5 py-2 rounded-xl font-bold whitespace-nowrap transition-all flex items-center gap-1.5 ${
                   activeCategory === tab.id
                     ? "bg-[#0A507A] text-white shadow-soft"
                     : "bg-slate-100 hover:bg-slate-200 text-slate-700"
                 }`}
               >
                 <span>{tab.label}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
                   activeCategory === tab.id
                     ? "bg-white/20 text-white"
                     : "bg-slate-200/80 text-slate-600"

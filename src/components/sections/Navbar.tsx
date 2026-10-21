@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { 
   ChevronDown, 
   Menu, 
@@ -33,6 +34,7 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -169,8 +171,12 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/#video-academy"
-              className="px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#0A507A] hover:bg-slate-50 transition"
+              href="/videos"
+              className={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
+                pathname === "/videos"
+                  ? "text-[#0A507A] bg-[#0A507A]/10 font-bold"
+                  : "text-slate-700 hover:text-[#0A507A] hover:bg-slate-50"
+              }`}
             >
               فيديوهات الشرح
             </Link>
@@ -260,9 +266,13 @@ export default function Navbar() {
               أنظمة مفصلة خصيصاً (Custom ERP)
             </Link>
             <Link
-              href="/#video-academy"
+              href="/videos"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              className={`block px-3 py-2 rounded-lg text-sm font-semibold ${
+                pathname === "/videos"
+                  ? "text-[#0A507A] bg-[#0A507A]/10 font-bold"
+                  : "text-slate-700 hover:bg-slate-50"
+              }`}
             >
               فيديوهات الشرح والتدريب
             </Link>
