@@ -48,7 +48,7 @@ export default function FloatingWhatsApp() {
               </button>
             </div>
             <p className="mt-3 text-xs leading-relaxed text-slate-100">
-              أهلاً بيك في مزايا للأنظمة البرمجية! يسعدنا مساعدتك، تحب تتواصل مع مين دلوقتي؟
+              أهلاً بيك في شركة مزايا للبرمجيات! يسعدنا مساعدتك، تحب تتواصل مع مين دلوقتي؟
             </p>
           </div>
 

@@ -46,19 +46,19 @@ export default function Footer() {
             </Link>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              الشركة الرائدة في تقديم حلول برمجيات الكاشير، وإدارة المخازن، والأنظمة المحاسبية والـ ERP المتكاملة للمحلات، السوبر ماركت، الشركات، والمصانع في مصر والوطن العربي.
+              الشركة الرائدة في تقديم حلول برمجيات الكاشير، وإدارة المخازن، والأنظمة المحاسبية والـ ERP المتكاملة للمحلات، والمعارض، الشركات، والمصانع في مصر والوطن العربي.
             </p>
 
             <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 p-2.5 rounded-xl border border-emerald-200/80 w-fit">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>متوافق ومعتمد مع منظومة الفاتورة والإيصال الإلكتروني</span>
+              <span>متوافق ومعتمد مع منظومة الفاتورة الإلكترونية في السعودية (ZATCA)</span>
             </div>
           </div>
 
           {/* Quick System Links (4 cols) */}
           <div className="lg:col-span-4 space-y-3">
             <h4 className="font-bold text-sm text-slate-900 border-s-2 border-[#0A507A] ps-2.5">
-              الأنظمة والموديولات التشغيلية
+              الأنظمة والموديولات
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               {SYSTEM_MODULES.map((module) => (
@@ -132,7 +132,7 @@ export default function Footer() {
         {/* Bottom Sub-footer */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            جميع الحقوق محفوظة © {new Date().getFullYear()} <strong>مزايا للبرمجيات وتكنولوجيا المعلومات</strong>.
+            جميع الحقوق محفوظة © {new Date().getFullYear()} <strong>شركة مزايا للبرمجيات</strong>.
           </div>
           <div className="flex items-center gap-4 text-slate-600">
             <span>جمهورية مصر العربية 🇪🇬</span>
