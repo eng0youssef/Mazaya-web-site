@@ -16,19 +16,21 @@ import {
   FileSpreadsheet,
   Boxes,
   Landmark,
-  TrendingUp
+  TrendingUp,
+  Sparkles
 } from "lucide-react";
+import InteractiveScreenHotspots from "@/components/ui/InteractiveScreenHotspots";
 
 export default function ZigZagShowcase() {
   return (
     <section className="py-16 lg:py-24 bg-white relative overflow-hidden border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         
-        {/* Block 1: POS / Cashier Speed */}
+        {/* Block 1: POS / Cashier Speed & Interactive Screen Demo */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* Text Side (Right in RTL) */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#0A507A]/10 text-[#0A507A] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-[#F2C12E]" />
               <span>سرعة متناهية في نقاط البيع (POS)</span>
@@ -60,93 +62,20 @@ export default function ZigZagShowcase() {
               ))}
             </div>
 
-            <div className="pt-4">
+            <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
-                href="/systems/pos-sales"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#0A507A] hover:text-[#06324D] transition group"
+                href="/systems/mazaya-max"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-xs sm:text-sm transition shadow-soft group"
               >
-                <span>استكشف مواصفات شاشة الكاشير بالتفصيل</span>
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
+                <span>استكشف مواصفات نظام مزايا ماكس</span>
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-[#F2C12E]" />
               </Link>
             </div>
           </div>
 
-          {/* UI Mockup Side (Left in RTL) */}
-          <div className="lg:col-span-6">
-            <div className="relative bg-[#F8FAFC] rounded-3xl p-5 border border-slate-200 shadow-xl overflow-hidden">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-xs">
-                <span className="font-bold text-slate-800">فاتورة بيع رقم: #3842</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-[11px]">
-                  طابعة حرارية جاهزة
-                </span>
-              </div>
-
-              {/* Items Table Mockup */}
-              <div className="my-4 divide-y divide-slate-200/70 text-xs">
-                <div className="py-2.5 flex items-center justify-between font-bold text-slate-500 text-[11px]">
-                  <span>الصنف</span>
-                  <div className="flex gap-6">
-                    <span>الكمية</span>
-                    <span>السعر</span>
-                    <span>الإجمالي</span>
-                  </div>
-                </div>
-                <div className="py-2.5 flex items-center justify-between text-slate-800 font-medium">
-                  <div>
-                    <div className="font-bold">زيت زيتون بكر ممتاز 1 لتر</div>
-                    <div className="text-[10px] text-slate-400">باركود: 622300184201</div>
-                  </div>
-                  <div className="flex gap-6 font-mono font-bold">
-                    <span>3</span>
-                    <span>185.00</span>
-                    <span className="text-[#0A507A]">555.00 ج.م</span>
-                  </div>
-                </div>
-                <div className="py-2.5 flex items-center justify-between text-slate-800 font-medium">
-                  <div>
-                    <div className="font-bold">جبن رومي قديم (وزن ميزان)</div>
-                    <div className="text-[10px] text-slate-400">باركود ميزان: 9901420500</div>
-                  </div>
-                  <div className="flex gap-6 font-mono font-bold">
-                    <span>0.75 كجم</span>
-                    <span>320.00</span>
-                    <span className="text-[#0A507A]">240.00 ج.م</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Total Calculation Strip */}
-              <div className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-soft">
-                <div className="flex justify-between text-xs text-slate-500 mb-1">
-                  <span>المجموع الفرعي:</span>
-                  <span className="font-mono font-bold">795.00 ج.م</span>
-                </div>
-                <div className="flex justify-between text-xs text-slate-500 mb-2">
-                  <span>ضريبة القيمة المضافة (14%):</span>
-                  <span className="font-mono font-bold">111.30 ج.م</span>
-                </div>
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-sm font-bold text-slate-900">المطلوب سداده:</span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-xl font-extrabold text-[#0A507A] font-mono">906.30</span>
-                    <span className="text-xs font-bold text-[#F2C12E]">ج.م</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fast Action Buttons */}
-              <div className="grid grid-cols-3 gap-2 mt-4 text-xs font-bold">
-                <div className="p-2.5 rounded-xl bg-emerald-600 text-white text-center shadow-xs">
-                  كاش (F1)
-                </div>
-                <div className="p-2.5 rounded-xl bg-[#0A507A] text-white text-center shadow-xs">
-                  فيزا (F2)
-                </div>
-                <div className="p-2.5 rounded-xl bg-slate-200 text-slate-700 text-center">
-                  آجل (F3)
-                </div>
-              </div>
-            </div>
+          {/* Interactive Screen Hotspots Side (Left in RTL) */}
+          <div className="lg:col-span-7">
+            <InteractiveScreenHotspots />
           </div>
 
         </div>
