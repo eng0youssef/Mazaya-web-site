@@ -25,7 +25,7 @@ export default function ReadyVsCustomSection() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
             <Sparkles className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
-              الميزة الهجينة — برنامج جاهز ولا سيستم متفصل على مقاسك؟
+             برنامج جاهز ولا سيستم متفصل على مقاسك؟
             </span>
           </div>
 
@@ -75,9 +75,9 @@ export default function ReadyVsCustomSection() {
                     "السوبر ماركت والهايبر",
                     "محلات الملابس والأحذية",
                     "المطاعم والكافيهات",
-                    "المعارض ومحلات الأدوات",
+                    "المعارض ومحلات الأدوات الصحية",
                     "شركات التوزيع وتجار الجملة",
-                    "الصيدليات ومحلات الأجهزة",
+                    "محلات العدد اليدوية والحدايد",
                   ].map((cat, i) => (
                     <span key={i} className="px-2.5 py-1 rounded-lg bg-white text-slate-700 font-medium border border-slate-200/70">
                       {cat}
@@ -89,10 +89,10 @@ export default function ReadyVsCustomSection() {
               {/* Checklist */}
               <div className="space-y-3 mb-8 text-xs sm:text-sm text-slate-700">
                 {[
-                  "جاهز للعمل فوراً بدون فترات انتظار طويلة أو تكاليف تطوير ضخمة.",
+                  "جاهز للعمل فوراً بدون فترات انتظار طويلة أو تكاليف تطوير كبيرة.",
                   "قواعد بيانات سريعة ومحمية ضد انقطاع الكهرباء وتلف الملفات.",
                   "شامل كافة تقارير الكاشير، كروت الأصناف، وكشوف حسابات العملاء.",
-                  "تحديثات دورية مجانية وتوافق مستمر مع متطلبات الضرائب.",
+                  "تحديثات دورية مجانية .",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
@@ -129,7 +129,7 @@ export default function ReadyVsCustomSection() {
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold text-[#0A507A] mb-2 flex items-center gap-2">
-                <span>أنظمة مفصلة خصيصاً (Custom ERP)</span>
+                <span>أنظمة مفصلة مخصوص (Custom ERP)</span>
               </h3>
               
               <p className="text-sm text-slate-600 leading-relaxed mb-6">
@@ -162,9 +162,9 @@ export default function ReadyVsCustomSection() {
               <div className="space-y-3 mb-8 text-xs sm:text-sm text-slate-700">
                 {[
                   "جلسات تحليل أعمال مستفيضة لفهم وتوثيق كل خطوة في مصنعك أو شركتك.",
-                  "إمكانية اختيار منصة التشغيل المفضلة: ديسكتوب، ويب سحابي، وتطبيقات موبايل.",
+                  "إمكانية اختيار منصة التشغيل المفضلة: ديسكتوب، وتطبيقات موبايل.",
                   "قواعد بيانات غير محدودة وقابلة للتوسع المستقبلي مع نمو أعمالك.",
-                  "ربط كامل مع ماكينات المصنع، البوابات، أو أي أنظمة خارجية (APIs).",
+                  "ربط كامل مع البوابات، أو أي أنظمة خارجية (APIs).",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#0A507A] flex-shrink-0 mt-0.5" />
@@ -178,7 +178,7 @@ export default function ReadyVsCustomSection() {
               href="#lead-capture"
               className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-sm transition-all shadow-navy group border border-[#F2C12E]/30"
             >
-              <span>اطلب دراسة ومقايسة لنظامك المخصص</span>
+              <span>اطلب دراسة ومقايسة لنظامك المخصوص</span>
               <ArrowLeft className="w-4 h-4 text-[#F2C12E] group-hover:-translate-x-1 transition-transform" />
             </Link>
           </div>

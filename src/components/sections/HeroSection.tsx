@@ -29,7 +29,7 @@ export default function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
             <span className="flex h-2 w-2 rounded-full bg-[#F2C12E] animate-pulse" />
             <span className="text-xs sm:text-sm font-bold text-[#0A507A]">
-              الحل البرمجي المتكامل لإدارة شغلك في مصر والوطن العربي 🇪🇬
+              الحل البرمجي المتكامل لإدارة شغلك في مصر والوطن العربي
             </span>
           </div>
 
@@ -45,7 +45,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl">
-            بنقدملك أقوى برامج الكاشير والمخازن والحسابات والأنظمة التخصصية الجاهزة للشغل فوراً، مع إمكانية تفصيل وبرمجة أنظمة مخصوصة (Custom ERP) على مقاس دورة العمل في شركتك أو مصنعك، مع دعم فني معاك خطوة بخطوة وشروحات فيديو لكل تفصيلة.
+            بنقدملك أقوى برامج الكاشير والمخازن والحسابات والأنظمة المتخصصة الجاهزة للشغل فوراً، مع إمكانية تفصيل وبرمجة أنظمة مخصوصة (Custom ERP) على مقاس دورة العمل في شركتك أو مصنعك، مع دعم فني معاك خطوة بخطوة وشروحات فيديو لكل تفصيلة.
           </p>
 
           {/* Dual Call To Actions */}
@@ -72,7 +72,7 @@ export default function HeroSection() {
           {/* Tax Compliance Micro-Tag */}
           <div className="pt-2 flex items-center justify-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50/80 px-4 py-2 rounded-xl border border-emerald-200/80">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>متوافق ومعتمد مع منظومة الفاتورة والإيصال الإلكتروني (مصلحة الضرائب المصرية) وهيئة ZATCA</span>
+            <span>متوافق ومعتمد مع منظومة الفاتورة الإلكترونية وهيئة الزكاة في السعودية ZATCA</span>
           </div>
 
           {/* Trust Metrics Bar */}
@@ -100,7 +100,7 @@ export default function HeroSection() {
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
         youtubeId="X0mdQtelSdk"
-        title="شرح شامل لنظام مزايا ماكس لإدارة المبيعات والمخازن — مزايا للبرمجيات"
+        title="شرح شامل لنظام مزايا ماكس لإدارة المبيعات والمخازن"
       />
     </section>
   );

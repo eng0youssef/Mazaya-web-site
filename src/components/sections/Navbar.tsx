@@ -73,7 +73,7 @@ export default function Navbar() {
                 مزايا للبرمجيات
               </span>
               <span className="text-[11px] sm:text-xs text-slate-500 font-semibold tracking-wide">
-                أنظمة الـ ERP والحلول المتخصصة
+                شريكك من البداية للنهاية
               </span>
             </div>
           </Link>
@@ -94,7 +94,7 @@ export default function Navbar() {
                     : "text-slate-700 hover:text-[#0A507A] hover:bg-slate-50"
                 }`}
               >
-                <span>الأنظمة المتخصصة</span>
+                <span>أنظمتنا</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isMegaMenuOpen ? "rotate-180 text-[#0A507A]" : "text-slate-400"}`} />
               </button>
 
@@ -107,12 +107,12 @@ export default function Navbar() {
                         أنظمة مزايا المتكاملة والتخصصية للأنشطة المختلفة
                       </h4>
                       <p className="text-xs text-slate-500">
-                        حلول برمجية جاهزة للشغل الفوري ومعتمدة تدعم الكاشير، الفواتير، والمخازن
+                        حلول برمجية جاهزة للشغل الفوري
                       </p>
                     </div>
                     <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0A507A] bg-[#0A507A]/10 px-2.5 py-1 rounded-full">
                       <Sparkles className="w-3 h-3 text-[#F2C12E]" />
-                      8 أنظمة تشغيلية
+                      8 أنظمة 
                     </span>
                   </div>
 
@@ -146,7 +146,7 @@ export default function Navbar() {
 
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs bg-slate-50/70 p-2.5 rounded-xl">
                     <span className="text-slate-600">
-                      محتاج نظام مصمم ومبرمج مخصوص لدورة عمل شركتك؟
+                      محتاج نظام مصمم مخصوص لدورة عمل شركتك؟
                     </span>
                     <Link
                       href="/#ready-vs-custom"
@@ -199,7 +199,7 @@ export default function Navbar() {
               <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[#0A507A]">
                 <PhoneCall className="w-3.5 h-3.5" />
               </div>
-              <span dir="ltr">{COMPANY_INFO.phones.formattedSales}</span>
+              <span dir="ltr">{COMPANY_INFO.phones.formattedSupport}</span>
             </a>
 
             <Link

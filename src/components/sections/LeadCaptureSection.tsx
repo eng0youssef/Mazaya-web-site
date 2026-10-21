@@ -49,7 +49,7 @@ export default function LeadCaptureSection() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
               <Sparkles className="w-4 h-4 text-[#F2C12E]" />
               <span className="text-xs font-bold text-[#0A507A]">
-                نسخة تجريبية مجانية وبدون أي التزام
+                نسخة تجريبية مجانية 
               </span>
             </div>
 
@@ -64,8 +64,8 @@ export default function LeadCaptureSection() {
             <div className="space-y-4 pt-2">
               {[
                 { title: "معاينة حية للنظام المتخصص بمجالك", desc: "سواء مزايا ماكس، جلاس، ريستورانت، أو موتو، هتشوف دورتك العملية كاملة." },
-                { title: "استشارة مجانية من مهندس أنظمة", desc: "نساعدك في اختيار أنسب أجهزة الباركود والطابعات بدون تكاليف زيادة." },
-                { title: "دعم كامل لمنظومة الفاتورة والإيصال", desc: "جاهزون للربط القانوني المباشر مع مصلحة الضرائب المصرية." },
+                { title: "شرح كامل لأساسيات السيستم", desc: "نساعدك في فهم وتعلم الشغل على السيستم." },
+                { title: "دعم كامل لمنظومة الفاتورة والإيصال", desc: "جاهزون للربط القانوني المباشر مع مصلحة الضرائب السعودية." },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -90,7 +90,7 @@ export default function LeadCaptureSection() {
                   className="font-bold text-slate-900 hover:text-[#0A507A] text-sm"
                   dir="ltr"
                 >
-                  {COMPANY_INFO.phones.formattedSales}
+                  {COMPANY_INFO.phones.formattedSupport}
                 </a>
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function LeadCaptureSection() {
                     تم استلام طلبك بنجاح!
                   </h3>
                   <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    شكراً لثقتك في مزايا للبرمجيات. سيقوم مهندس المبيعات بالتواصل مع حضرتك على رقم الموبايل / الواتساب المسجل لتنسيق الديمو وتجربة السيستم.
+                    شكراً لثقتك في مزايا للبرمجيات. سيقوم مهندس الدعم بالتواصل مع حضرتك على رقم الموبايل / الواتساب المسجل لتنسيق الديمو وتجربة السيستم.
                   </p>
                   <button
                     onClick={() => setIsSubmitted(false)}
@@ -123,7 +123,7 @@ export default function LeadCaptureSection() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="border-b border-slate-100 pb-4 mb-4">
                     <h3 className="font-bold text-lg text-slate-900">
-                      طلب تجربة مجانية وعرض سعر
+                      طلب تجربة مجانية ومعرفة الأسعار
                     </h3>
                     <p className="text-xs text-slate-500">
                       برجاء كتابة البيانات وسيتواصل معك مهندس متخصص لمتابعة طلبك.
@@ -226,7 +226,7 @@ export default function LeadCaptureSection() {
                         type="text"
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        placeholder="أي تفاصيل عن دورتك المستندية أو الأجهزة..."
+                        placeholder="أي تفاصيل أخرى..."
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
                       />
                     </div>

@@ -34,11 +34,11 @@ export default function SupportHubSection() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-            مش بنبيعلك السيستم ونسيبك؛ مهندسو الدعم الفني معاك لحظة بلحظة
+            مش بنبيعلك السيستم ونسيبك؛ مهندسو الدعم الفني معاك لحظة بلحظة كل يوم من 10 ص ل 7 م ما عدا يوم الجمعة
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            عارفين إن توقف الكاشير أو السيستم يعني تعطل شغلك وخسارة فلوس؛ عشان كده فريق الدعم الفني في مزايا متاح للتدخل السريع عن بعد أو عبر الهاتف لحل أي استفسار في ثواني معدودة.
+            عارفين إن توقف الكاشير أو السيستم يعني تعطل شغلك وخسارة فلوس؛ عشان كده فريق الدعم الفني في مزايا متاح للتدخل السريع عن بعد أو عبر الهاتف لحل أي استفسار في ثواني معدودة أو عن طريق زيارة لحد عندك.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ export default function SupportHubSection() {
             <div className="flex items-center gap-2 text-slate-600">
               <PhoneCall className="w-4 h-4 text-[#0A507A]" />
               <span>
-                خط الدعم الفني المباشر في مصر: <strong>{COMPANY_INFO.phones.formattedSupport}</strong>
+                خط الدعم الفني المباشر: <strong>{COMPANY_INFO.phones.support}</strong>
               </span>
             </div>
 
