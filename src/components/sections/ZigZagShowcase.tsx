@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { 
   CheckCircle2, 
@@ -17,11 +17,15 @@ import {
   Boxes,
   Landmark,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  ZoomIn
 } from "lucide-react";
 import InteractiveScreenHotspots from "@/components/ui/InteractiveScreenHotspots";
+import ImageLightboxModal from "@/components/ui/ImageLightboxModal";
 
 export default function ZigZagShowcase() {
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; title: string; subtitle: string } | null>(null);
+
   return (
     <section className="py-16 lg:py-24 bg-white relative overflow-hidden border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
@@ -83,65 +87,73 @@ export default function ZigZagShowcase() {
         {/* Block 2: Inventory Control & Shortages (Reversed Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* UI Mockup Side (Right in RTL for zigzag effect) */}
+          {/* Real Report Showcase Side */}
           <div className="lg:col-span-6 order-2 lg:order-1">
-            <div className="relative bg-[#F8FAFC] rounded-3xl p-5 border border-slate-200 shadow-xl overflow-hidden">
+            <div className="relative bg-[#F8FAFC] rounded-3xl p-3.5 sm:p-5 border border-slate-200/90 shadow-xl overflow-hidden group">
+              {/* Report Header Strip */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-xs">
                 <div className="flex items-center gap-2">
-                  <Boxes className="w-4 h-4 text-[#0A507A]" />
-                  <span className="font-bold text-slate-800">كارت الصنف: مسحوق غسيل أوتوماتيك 5 كجم</span>
+                  <FileSpreadsheet className="w-4 h-4 text-[#0A507A]" />
+                  <span className="font-bold text-slate-800">
+                    تقرير كارت الصنف الرسمي — نظام مزايا ماكس
+                  </span>
                 </div>
-                <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
-                  حد الطلب
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                  حركة بالثانية
                 </span>
               </div>
 
-              {/* Stock breakdown cards */}
-              <div className="grid grid-cols-3 gap-2.5 my-4">
-                <div className="p-3 rounded-2xl bg-white border border-slate-200/80 text-center">
-                  <span className="text-[11px] text-slate-500 block">المخزن الرئيسي</span>
-                  <span className="text-lg font-bold text-[#0A507A] font-mono mt-0.5 block">120 كرتونة</span>
-                </div>
-                <div className="p-3 rounded-2xl bg-white border border-slate-200/80 text-center">
-                  <span className="text-[11px] text-slate-500 block">مخزن الفرع 1</span>
-                  <span className="text-lg font-bold text-amber-600 font-mono mt-0.5 block">8 كراتين</span>
-                </div>
-                <div className="p-3 rounded-2xl bg-white border border-slate-200/80 text-center">
-                  <span className="text-[11px] text-slate-500 block">سيارة التوزيع</span>
-                  <span className="text-lg font-bold text-slate-700 font-mono mt-0.5 block">15 كرتونة</span>
-                </div>
-              </div>
-
-              {/* Movement Ledger */}
-              <div className="space-y-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-white border border-slate-200/60 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span className="font-semibold text-slate-800">إذن إضافة مشتريات (فاتورة #502)</span>
-                  </div>
-                  <span className="font-mono font-bold text-emerald-600">+50 كرتونة</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white border border-slate-200/60 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-rose-500"></span>
-                    <span className="font-semibold text-slate-800">مبيعات كاشير الفرع الرئيسي</span>
-                  </div>
-                  <span className="font-mono font-bold text-rose-600">-12 كرتونة</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-white border border-slate-200/60 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-sky-500"></span>
-                    <span className="font-semibold text-slate-800">إذن تحويل لمخزن فرع الهرم</span>
-                  </div>
-                  <span className="font-mono font-bold text-sky-600">تحويل 20 كرتونة</span>
+              {/* Real Report Image Container with Zoom On Click */}
+              <div 
+                onClick={() => setZoomedImage({
+                  src: "/screenshots/mazaya-item-card-report.png",
+                  title: "تقرير كارت الصنف التفصيلي — نظام مزايا ماكس",
+                  subtitle: "معاينة تفصيلية عالية الدقة لحركة الوارد والصادر وتتبع أرصدة المخازن بالثانية"
+                })}
+                className="my-3.5 bg-white rounded-2xl p-2 border border-slate-200 shadow-sm overflow-hidden cursor-zoom-in relative group/zoom"
+                title="اضغط لتكبير التقرير"
+              >
+                <img
+                  src="/screenshots/mazaya-item-card-report.png"
+                  alt="تقرير كارت الصنف التفصيلي في نظام مزايا ماكس"
+                  className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
+                />
+                {/* Hover zoom pill overlay */}
+                <div className="absolute inset-0 bg-slate-900/15 opacity-0 group-hover/zoom:opacity-100 transition-opacity rounded-xl flex items-center justify-center pointer-events-none">
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900/90 text-white text-xs font-bold shadow-xl border border-white/20 backdrop-blur-md transform scale-95 group-hover/zoom:scale-100 transition-transform">
+                    <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
+                    <span>اضغط لتكبير التقرير</span>
+                  </span>
                 </div>
               </div>
 
-              {/* Stock Warning Notice */}
-              <div className="mt-4 p-3 rounded-2xl bg-amber-50 border border-amber-200 flex items-center gap-3 text-xs text-amber-900">
-                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0" />
-                <span>
-                  <strong>تنبيه ذكي:</strong> اقترب رصيد الصنف في فرع الهرم من النفاد، تم تجهيز مقترح إذن تحويل أوتوماتيك.
+              {/* Summary Stats Strip based on real report numbers */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white border border-slate-200 shadow-xs">
+                  <span className="text-[11px] text-slate-500 block">إجمالي الوارد</span>
+                  <span className="text-base sm:text-lg font-bold text-emerald-600 font-mono mt-0.5 block">
+                    +22.00 قطعة
+                  </span>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white border border-slate-200 shadow-xs">
+                  <span className="text-[11px] text-slate-500 block">إجمالي الصادر</span>
+                  <span className="text-base sm:text-lg font-bold text-rose-600 font-mono mt-0.5 block">
+                    -2.00 قطعة
+                  </span>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-[#0A507A]/10 border border-[#0A507A]/20 shadow-xs">
+                  <span className="text-[11px] text-[#0A507A] font-semibold block">الرصيد الفعلي الحالي</span>
+                  <span className="text-base sm:text-lg font-extrabold text-[#0A507A] font-mono mt-0.5 block">
+                    20.00 قطعة
+                  </span>
+                </div>
+              </div>
+
+              {/* Verification Micro-badge */}
+              <div className="mt-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center gap-2.5 text-xs text-emerald-900">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <span className="text-[11px] sm:text-xs leading-relaxed">
+                  <strong>دقة رقابية 100%:</strong> تتبع تاريخ كل حركة (بيع، شراء، رصيد افتتاحي) برقم الفاتورة واسم العميل والمورد بالثانية.
                 </span>
               </div>
             </div>
@@ -182,7 +194,7 @@ export default function ZigZagShowcase() {
 
             <div className="pt-4">
               <Link
-                href="/systems/inventory-stock"
+                href="/systems/mazaya-max"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#0A507A] hover:text-[#06324D] transition group"
               >
                 <span>شاهد إمكانيات موديول المخازن والأصناف</span>
@@ -231,7 +243,7 @@ export default function ZigZagShowcase() {
 
             <div className="pt-4">
               <Link
-                href="/systems/treasury-banking"
+                href="/systems/mazaya-max"
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#0A507A] hover:text-[#06324D] transition group"
               >
                 <span>تعرف على موديول الخزينة والحسابات العامة</span>
@@ -240,75 +252,74 @@ export default function ZigZagShowcase() {
             </div>
           </div>
 
-          {/* UI Mockup Side */}
+          {/* Real Treasury Report Showcase Side */}
           <div className="lg:col-span-6">
-            <div className="relative bg-[#F8FAFC] rounded-3xl p-5 border border-slate-200 shadow-xl overflow-hidden">
+            <div className="relative bg-[#F8FAFC] rounded-3xl p-3.5 sm:p-5 border border-slate-200/90 shadow-xl overflow-hidden group">
+              {/* Report Header Strip */}
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-xs">
-                <span className="font-bold text-slate-800">حركة الخزينة اليومية — الخزينة الرئيسية</span>
-                <span className="text-[11px] text-slate-500 font-mono">2026/10/20</span>
+                <div className="flex items-center gap-2">
+                  <Landmark className="w-4 h-4 text-[#0A507A]" />
+                  <span className="font-bold text-slate-800">
+                    تقرير كشف حساب الخزينة — نظام مزايا ماكس
+                  </span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+                  توازن ومطابقة 100%
+                </span>
               </div>
 
-              {/* Treasury Balance Metric */}
-              <div className="my-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-soft flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-slate-500">رصيد الخزينة الفعلي الحالي</span>
-                  <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-2xl font-bold text-slate-900 font-mono">284,500</span>
-                    <span className="text-xs font-bold text-[#0A507A]">ج.م</span>
-                  </div>
-                </div>
-                <div className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 font-bold text-xs border border-emerald-200 flex items-center gap-1.5">
-                  <TrendingUp className="w-4 h-4" />
-                  <span>الدرج مطابق للسيستم</span>
-                </div>
-              </div>
-
-              {/* Transactions Stream */}
-              <div className="space-y-2 text-xs">
-                <div className="p-3 rounded-xl bg-white border border-slate-200/70 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                      ↓
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900">سند قبض نقدية #481</div>
-                      <div className="text-[11px] text-slate-500">تحصيل من العميل: شركة الأمل لتجارة التجزئة</div>
-                    </div>
-                  </div>
-                  <span className="font-mono font-bold text-emerald-600">+15,000 ج.م</span>
-                </div>
-
-                <div className="p-3 rounded-xl bg-white border border-slate-200/70 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center font-bold">
-                      ↑
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900">سند صرف مصروفات #210</div>
-                      <div className="text-[11px] text-slate-500">بند: إيجار الفرع ومصروفات كهرباء</div>
-                    </div>
-                  </div>
-                  <span className="font-mono font-bold text-rose-600">-6,200 ج.م</span>
-                </div>
-
-                <div className="p-3 rounded-xl bg-white border border-slate-200/70 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-sky-100 text-[#0A507A] flex items-center justify-center font-bold">
-                      ⇅
-                    </div>
-                    <div>
-                      <div className="font-bold text-slate-900">إيداع بنكي — البنك الأهلي المصري</div>
-                      <div className="text-[11px] text-slate-500">تحويل كاش من الخزينة إلى الحساب الجاري</div>
-                    </div>
-                  </div>
-                  <span className="font-mono font-bold text-slate-700">-50,000 ج.م</span>
+              {/* Real Treasury Report Image Container with Zoom */}
+              <div 
+                onClick={() => setZoomedImage({
+                  src: "/screenshots/mazaya-treasury-report.png",
+                  title: "تقرير كشف حساب الخزينة والمحافظ (انستا باي) — نظام مزايا ماكس",
+                  subtitle: "معاينة تفصيلية لحركات الوارد والصادر والمصروفات والتحصيلات بالجنيه المصري"
+                })}
+                className="my-3.5 bg-white rounded-2xl p-2 border border-slate-200 shadow-sm overflow-hidden cursor-zoom-in relative group/zoom"
+                title="اضغط لتكبير كشف الحساب"
+              >
+                <img
+                  src="/screenshots/mazaya-treasury-report.png"
+                  alt="تقرير كشف حساب الخزينة في نظام مزايا ماكس"
+                  className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
+                />
+                {/* Hover zoom pill overlay */}
+                <div className="absolute inset-0 bg-slate-900/15 opacity-0 group-hover/zoom:opacity-100 transition-opacity rounded-xl flex items-center justify-center pointer-events-none">
+                  <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900/90 text-white text-xs font-bold shadow-xl border border-white/20 backdrop-blur-md transform scale-95 group-hover/zoom:scale-100 transition-transform">
+                    <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
+                    <span>اضغط لتكبير كشف الحساب</span>
+                  </span>
                 </div>
               </div>
 
-              {/* Profit Report Strip */}
-              <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
-                <span>صافي أرباح الشهر حتى تاريخه:</span>
-                <span className="font-bold text-emerald-600 font-mono text-sm">+64,800 ج.م</span>
+              {/* Summary Stats Strip based on real treasury report numbers */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white border border-slate-200 shadow-xs">
+                  <span className="text-[11px] text-slate-500 block">إجمالي الوارد (مدين)</span>
+                  <span className="text-base sm:text-lg font-bold text-emerald-600 font-mono mt-0.5 block">
+                    +1,719.00 ج.م
+                  </span>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-white border border-slate-200 shadow-xs">
+                  <span className="text-[11px] text-slate-500 block">إجمالي الصادر (دائن)</span>
+                  <span className="text-base sm:text-lg font-bold text-rose-600 font-mono mt-0.5 block">
+                    -645.00 ج.م
+                  </span>
+                </div>
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-[#0A507A]/10 border border-[#0A507A]/20 shadow-xs">
+                  <span className="text-[11px] text-[#0A507A] font-semibold block">رصيد الخزينة الحالي</span>
+                  <span className="text-base sm:text-lg font-extrabold text-[#0A507A] font-mono mt-0.5 block">
+                    1,074.00 ج.م
+                  </span>
+                </div>
+              </div>
+
+              {/* Verification Micro-badge */}
+              <div className="mt-3 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center gap-2.5 text-xs text-emerald-900">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                <span className="text-[11px] sm:text-xs leading-relaxed">
+                  <strong>تزامن فوري:</strong> ربط الخزائن ومحافظ انستا باي وفودافون كاش مباشرة بالدورة المستندية لتسجيل كل سداد وتحصيل بدقة ومنع أي عجز نقدي.
+                </span>
               </div>
             </div>
           </div>
@@ -316,6 +327,16 @@ export default function ZigZagShowcase() {
         </div>
 
       </div>
+
+      {/* Lightbox Modal for Full-Resolution Image Viewing */}
+      <ImageLightboxModal
+        isOpen={!!zoomedImage}
+        onClose={() => setZoomedImage(null)}
+        imageSrc={zoomedImage?.src || ""}
+        imageAlt={zoomedImage?.title || ""}
+        title={zoomedImage?.title || ""}
+        subtitle={zoomedImage?.subtitle}
+      />
     </section>
   );
 }

@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { ZoomIn } from "lucide-react";
+import ImageLightboxModal from "./ImageLightboxModal";
 
 interface HotspotData {
   id: number;
@@ -67,6 +69,7 @@ const HOTSPOTS: HotspotData[] = [
 
 export default function InteractiveScreenHotspots() {
   const [activeHotspotId, setActiveHotspotId] = useState<number | null>(null);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Close active tooltip when clicking outside
@@ -130,7 +133,31 @@ export default function InteractiveScreenHotspots() {
             </div>
           );
         })}
+
+        {/* Floating Zoom Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsZoomOpen(true);
+          }}
+          className="absolute bottom-3 start-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-md transition-all hover:scale-105 cursor-pointer"
+          title="اضغط لتكبير الشاشة بدقة كاملة"
+        >
+          <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
+          <span>تكبير الشاشة</span>
+        </button>
       </div>
+
+      {/* Lightbox Modal for Full-Resolution Viewing */}
+      <ImageLightboxModal
+        isOpen={isZoomOpen}
+        onClose={() => setIsZoomOpen(false)}
+        imageSrc="/screenshots/mazaya-pos-invoice.png"
+        imageAlt="شاشة فاتورة البيع ونقاط البيع (POS) — نظام مزايا ماكس"
+        title="شاشة فاتورة البيع ونقاط البيع (POS) — نظام مزايا ماكس"
+        subtitle="معاينة عالية الدقة لكافة حقول الفاتورة، الباركود، وطرق السداد"
+      />
 
       {/* Scoped CSS implementing the exact design and animations requested by user */}
       <style jsx>{`
