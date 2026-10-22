@@ -21,7 +21,7 @@ export default function ReadyVsCustomSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
+        <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
             <Sparkles className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
@@ -42,7 +42,7 @@ export default function ReadyVsCustomSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           
           {/* Card 1: Ready-to-Use Systems */}
-          <div className="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-soft hover:shadow-xl transition-all flex flex-col justify-between relative overflow-hidden">
+          <div data-aos="fade-up" data-aos-delay="100" className="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-soft hover:shadow-xl transition-all flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 end-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none" />
 
             <div>
@@ -112,7 +112,7 @@ export default function ReadyVsCustomSection() {
           </div>
 
           {/* Card 2: Custom ERP & Tailored Systems */}
-          <div className="bg-white rounded-3xl p-8 border-2 border-[#0A507A]/30 shadow-card hover:shadow-2xl transition-all flex flex-col justify-between relative overflow-hidden">
+          <div data-aos="fade-up" data-aos-delay="200" className="bg-white rounded-3xl p-8 border-2 border-[#0A507A]/30 shadow-card hover:shadow-2xl transition-all flex flex-col justify-between relative overflow-hidden">
             {/* Top Navy and Gold decorative header bar */}
             <div className="absolute top-0 start-0 end-0 h-2 bg-gradient-to-r from-[#0A507A] via-[#F2C12E] to-[#0A507A]" />
             <div className="absolute top-0 end-0 w-32 h-32 bg-[#0A507A]/5 rounded-bl-full pointer-events-none" />

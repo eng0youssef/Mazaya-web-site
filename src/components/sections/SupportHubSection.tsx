@@ -25,7 +25,7 @@ export default function SupportHubSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
+        <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
             <Headphones className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
@@ -45,7 +45,7 @@ export default function SupportHubSection() {
         {/* 3 Value Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft">
+          <div data-aos="fade-up" data-aos-delay="100" className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft hover:shadow-lg transition-all">
             <div className="w-12 h-12 rounded-2xl bg-[#0A507A]/10 text-[#0A507A] flex items-center justify-center mb-4">
               <Clock className="w-6 h-6" />
             </div>
@@ -57,7 +57,7 @@ export default function SupportHubSection() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft">
+          <div data-aos="fade-up" data-aos-delay="200" className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft hover:shadow-lg transition-all">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 text-[#946c00] flex items-center justify-center mb-4 border border-amber-200/60">
               <Laptop className="w-6 h-6" />
             </div>
@@ -69,7 +69,7 @@ export default function SupportHubSection() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft">
+          <div data-aos="fade-up" data-aos-delay="300" className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft hover:shadow-lg transition-all">
             <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-100">
               <ShieldCheck className="w-6 h-6" />
             </div>
@@ -84,7 +84,7 @@ export default function SupportHubSection() {
         </div>
 
         {/* Remote Support Quick Download Portal */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card">
+        <div data-aos="fade-up" data-aos-delay="150" className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div className="space-y-1 text-center lg:text-start">
               <div className="flex items-center justify-center lg:justify-start gap-2">

@@ -34,7 +34,7 @@ export default function SystemsBentoGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
+        <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
             <Sparkles className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
@@ -53,9 +53,11 @@ export default function SystemsBentoGrid() {
 
         {/* 8-Card Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SYSTEM_MODULES.map((module) => (
+          {SYSTEM_MODULES.map((module, idx) => (
             <div
               key={module.id}
+              data-aos="fade-up"
+              data-aos-delay={(idx % 4) * 80}
               className="group relative bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft hover:shadow-xl hover:border-[#0A507A]/40 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Large Watermark Number */}

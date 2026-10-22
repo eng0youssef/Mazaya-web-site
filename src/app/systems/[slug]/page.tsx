@@ -183,7 +183,7 @@ export default function SystemDetailPage({ params }: PageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
             {/* Right text info */}
-            <div className="lg:col-span-7 space-y-5">
+            <div data-aos="fade-up" className="lg:col-span-7 space-y-5">
               
               <div className="flex items-center gap-2.5">
                 <span className="px-3 py-1 rounded-lg bg-[#0A507A] text-white font-mono font-bold text-xs shadow-soft">
@@ -225,7 +225,7 @@ export default function SystemDetailPage({ params }: PageProps) {
             </div>
 
             {/* Left Highlights Card */}
-            <div className="lg:col-span-5">
+            <div data-aos="fade-up" data-aos-delay="150" className="lg:col-span-5">
               <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl space-y-4">
                 <h3 className="font-bold text-base text-slate-900 pb-3 border-b border-slate-100 flex items-center justify-between">
                   <span>أبرز مزايا التشغيل لنظام {currentModule.title}</span>
@@ -255,7 +255,7 @@ export default function SystemDetailPage({ params }: PageProps) {
       {/* 4 Deep-Dive Sub-Features Section */}
       <section className="py-16 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <div data-aos="fade-up" className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
             أدق التفاصيل التشغيلية المصممة لواقع العمل في مصر
           </h2>
@@ -268,6 +268,8 @@ export default function SystemDetailPage({ params }: PageProps) {
           {currentModule.subFeatures.map((sub, idx) => (
             <div
               key={idx}
+              data-aos="fade-up"
+              data-aos-delay={(idx % 2) * 100}
               className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft hover:shadow-lg transition-all space-y-3"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#0A507A]/10 text-[#0A507A] flex items-center justify-center shadow-soft">

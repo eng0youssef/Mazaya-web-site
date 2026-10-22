@@ -77,7 +77,7 @@ export default function LeadCaptureSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Right Column: Value pitch & Trust */}
-          <div className="lg:col-span-5 space-y-6">
+          <div data-aos="fade-up" className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
               <Sparkles className="w-4 h-4 text-[#F2C12E]" />
               <span className="text-xs font-bold text-[#0A507A]">
@@ -130,7 +130,7 @@ export default function LeadCaptureSection() {
           </div>
 
           {/* Left Column: Form Card */}
-          <div className="lg:col-span-7">
+          <div data-aos="fade-up" data-aos-delay="150" className="lg:col-span-7">
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative">
               
               {isSubmitted ? (

@@ -16,7 +16,7 @@ export default function FaqAccordion() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-12">
+        <div data-aos="fade-up" className="text-center space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0F7FB] border border-[#0A507A]/15 shadow-soft">
             <HelpCircle className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
@@ -35,11 +35,13 @@ export default function FaqAccordion() {
 
         {/* Accordion List */}
         <div className="space-y-4">
-          {FAQ_ITEMS.map((item) => {
+          {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
+                data-aos="fade-up"
+                data-aos-delay={(idx % 5) * 60}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
                     ? "bg-[#F8FAFC] border-[#0A507A]/40 shadow-soft"

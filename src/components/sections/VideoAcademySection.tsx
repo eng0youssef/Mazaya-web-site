@@ -49,7 +49,7 @@ export default function VideoAcademySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10">
+        <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F0F7FB] border border-[#0A507A]/15 shadow-soft">
             <Youtube className="w-4 h-4 text-rose-600" />
             <span className="text-xs font-bold text-[#0A507A]">
@@ -67,7 +67,7 @@ export default function VideoAcademySection() {
         </div>
 
         {/* Search Bar & Playlist Quick Link */}
-        <div className="max-w-2xl mx-auto mb-8 flex flex-col sm:flex-row items-center gap-3">
+        <div data-aos="fade-up" data-aos-delay="100" className="max-w-2xl mx-auto mb-8 flex flex-col sm:flex-row items-center gap-3">
           <div className="relative flex-1 w-full">
             <input
               type="text"
@@ -131,9 +131,11 @@ export default function VideoAcademySection() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredVideos.map((video) => (
+            {filteredVideos.map((video, idx) => (
               <div
                 key={video.id}
+                data-aos="fade-up"
+                data-aos-delay={(idx % 3) * 80}
                 onClick={() => setSelectedVideo(video)}
                 className="group bg-[#F8FAFC] rounded-3xl border border-slate-200/90 shadow-soft hover:shadow-xl hover:border-[#0A507A]/40 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between"
               >

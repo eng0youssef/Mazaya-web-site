@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
+import AOSInit from "@/components/ui/AOSInit";
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
@@ -138,6 +139,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#F8FAFC] text-slate-900 font-arabic selection:bg-[#F2C12E]/30 selection:text-[#0A507A] flex flex-col antialiased">
+        <AOSInit />
         <Navbar />
         <main className="flex-1 w-full">{children}</main>
         <Footer />
