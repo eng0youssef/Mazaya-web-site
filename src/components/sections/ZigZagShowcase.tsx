@@ -24,8 +24,8 @@ export default function ZigZagShowcase() {
         {/* Block 1: POS / Cashier Speed & Interactive Screen Demo */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Text Side (Right in RTL) */}
-          <div data-aos="fade-up" className="lg:col-span-5 space-y-6">
+          {/* Text Side (Right in RTL) - Slides in from Right */}
+          <div data-aos="fade-left" data-aos-duration="800" className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#0A507A]/10 text-[#0A507A] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-[#F2C12E]" />
               <span>سرعة متناهية في نقاط البيع (POS)</span>
@@ -68,8 +68,8 @@ export default function ZigZagShowcase() {
             </div>
           </div>
 
-          {/* Interactive Screen Hotspots Side (Left in RTL) */}
-          <div data-aos="fade-up" data-aos-delay="100" className="lg:col-span-7">
+          {/* Interactive Screen Hotspots Side (Left in RTL) - Slides in from Left */}
+          <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" className="lg:col-span-7">
             <InteractiveScreenHotspots />
           </div>
 
@@ -78,8 +78,8 @@ export default function ZigZagShowcase() {
         {/* Block 2: Inventory Control & Shortages (Reversed Layout) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Real Report Showcase Side */}
-          <div data-aos="fade-up" data-aos-delay="100" className="lg:col-span-6 order-2 lg:order-1">
+          {/* Real Report Showcase Side (Right in RTL) - Slides in from Right */}
+          <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="100" className="lg:col-span-6 order-2 lg:order-1">
             <div className="relative bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden group hover:border-[#0A507A]/40 transition-all duration-300">
               
               {/* Window Header Strip */}
@@ -170,8 +170,8 @@ export default function ZigZagShowcase() {
             </div>
           </div>
 
-          {/* Text Side (Left in RTL for zigzag effect) */}
-          <div data-aos="fade-up" className="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          {/* Text Side (Left in RTL for zigzag effect) - Slides in from Left */}
+          <div data-aos="fade-right" data-aos-duration="800" className="lg:col-span-6 order-1 lg:order-2 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#F2C12E]/15 text-[#946c00] text-xs font-bold">
               <Boxes className="w-3.5 h-3.5 text-[#0A507A]" />
               <span>رقابة وجرد مخازن صارم</span>
@@ -219,8 +219,8 @@ export default function ZigZagShowcase() {
         {/* Block 3: Treasury & Accounting Peace of Mind */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Text Side */}
-          <div data-aos="fade-up" className="lg:col-span-6 space-y-6">
+          {/* Text Side (Right in RTL) - Slides in from Right */}
+          <div data-aos="fade-left" data-aos-duration="800" className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-100/70 text-emerald-800 text-xs font-bold">
               <Landmark className="w-3.5 h-3.5 text-emerald-600" />
               <span>الخزينة والحسابات بدون تعقيد</span>
@@ -263,8 +263,8 @@ export default function ZigZagShowcase() {
             </div>
           </div>
 
-          {/* Real Treasury Report Showcase Side */}
-          <div data-aos="fade-up" data-aos-delay="100" className="lg:col-span-6">
+          {/* Real Treasury Report Showcase Side (Left in RTL) - Slides in from Left */}
+          <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" className="lg:col-span-6">
             <div className="relative bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden group hover:border-[#0A507A]/40 transition-all duration-300">
               
               {/* Window Header Strip */}

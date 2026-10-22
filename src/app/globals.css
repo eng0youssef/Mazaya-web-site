@@ -125,3 +125,16 @@ body {
 .animate-float-reverse {
   animation: float-reverse 4.5s ease-in-out infinite;
 }
+
+
+/* Responsive AOS: on mobile & tablets (< 1024px), translate horizontal slide animations into clean vertical fade-up to prevent side overflow and jank */
+@media (max-width: 1023px) {
+  [data-aos="fade-left"],
+  [data-aos="fade-right"] {
+    transform: translate3d(0, 35px, 0) !important;
+  }
+  [data-aos="fade-left"].aos-animate,
+  [data-aos="fade-right"].aos-animate {
+    transform: translate3d(0, 0, 0) !important;
+  }
+}

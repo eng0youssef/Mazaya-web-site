@@ -17,7 +17,7 @@ import {
 
 export default function ReadyVsCustomSection() {
   return (
-    <section id="ready-vs-custom" className="py-16 lg:py-24 bg-[#F8FAFC] relative border-b border-slate-200/70">
+    <section id="ready-vs-custom" className="py-16 lg:py-24 bg-[#F8FAFC] relative overflow-hidden border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -41,8 +41,8 @@ export default function ReadyVsCustomSection() {
         {/* 2 Comparison Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           
-          {/* Card 1: Ready-to-Use Systems */}
-          <div data-aos="fade-up" data-aos-delay="100" className="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-soft hover:shadow-xl transition-all flex flex-col justify-between relative overflow-hidden">
+          {/* Card 1: Ready-to-Use Systems (Right side in RTL) - Slides in from Right */}
+          <div data-aos="fade-left" data-aos-duration="800" className="bg-white rounded-3xl p-8 border border-slate-200/90 shadow-soft hover:shadow-xl transition-all flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 end-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none" />
 
             <div>
@@ -111,8 +111,8 @@ export default function ReadyVsCustomSection() {
             </Link>
           </div>
 
-          {/* Card 2: Custom ERP & Tailored Systems */}
-          <div data-aos="fade-up" data-aos-delay="200" className="bg-white rounded-3xl p-8 border-2 border-[#0A507A]/30 shadow-card hover:shadow-2xl transition-all flex flex-col justify-between relative overflow-hidden">
+          {/* Card 2: Custom ERP & Tailored Systems (Left side in RTL) - Slides in from Left */}
+          <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" className="bg-white rounded-3xl p-8 border-2 border-[#0A507A]/30 shadow-card hover:shadow-2xl transition-all flex flex-col justify-between relative overflow-hidden">
             {/* Top Navy and Gold decorative header bar */}
             <div className="absolute top-0 start-0 end-0 h-2 bg-gradient-to-r from-[#0A507A] via-[#F2C12E] to-[#0A507A]" />
             <div className="absolute top-0 end-0 w-32 h-32 bg-[#0A507A]/5 rounded-bl-full pointer-events-none" />
