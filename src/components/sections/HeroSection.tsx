@@ -52,7 +52,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2 w-full sm:w-auto">
             <Link
               href="#lead-capture"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-sm sm:text-base shadow-navy hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/40"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white font-bold text-sm sm:text-base shadow-navy hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/40"
             >
               <span>اطلب ديمو مجاني الآن</span>
               <ArrowLeft className="w-5 h-5 text-[#F2C12E]" />
@@ -60,7 +60,7 @@ export default function HeroSection() {
 
             <button
               onClick={() => setIsVideoOpen(true)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm sm:text-base border border-slate-200/90 shadow-soft hover:border-[#0A507A]/40 transition group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white hover:bg-slate-50 active:scale-[0.98] text-slate-800 font-bold text-sm sm:text-base border border-slate-200/90 shadow-soft hover:border-[#0A507A]/40 transition group"
             >
               <div className="w-7 h-7 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-xs group-hover:scale-110 transition">
                 <Play className="w-3.5 h-3.5 fill-current ms-0.5" />
@@ -71,8 +71,8 @@ export default function HeroSection() {
 
           {/* Tax Compliance Micro-Tag */}
           <div className="pt-2 flex items-center justify-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50/80 px-4 py-2 rounded-xl border border-emerald-200/80">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>متوافق ومعتمد مع منظومة الفاتورة الإلكترونية وهيئة الزكاة في السعودية ZATCA</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+            <span>متوافق ومعتمد مع الفاتورة والإيصال الإلكتروني بمصر وهيئة الزكاة بالسعودية ZATCA</span>
           </div>
 
           {/* Trust Metrics Bar */}

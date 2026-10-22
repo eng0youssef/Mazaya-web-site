@@ -86,14 +86,6 @@ export default function InteractiveScreenHotspots() {
     };
   }, []);
 
-  // Developer helper tool: Log click coordinates on image
-  const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (((e.clientX - rect.left) / rect.width) * 100).toFixed(1);
-    const y = (((e.clientY - rect.top) / rect.height) * 100).toFixed(1);
-    console.log(`انسخ الإحداثيات دي للنقطة الجديدة -> style="top: ${y}%; left: ${x}%;"`);
-  };
-
   return (
     <div className="interactive-showcase-container w-full py-6">
       <div ref={wrapperRef} className="screen-wrapper">
@@ -101,8 +93,9 @@ export default function InteractiveScreenHotspots() {
         <img
           src="/screenshots/mazaya-pos-invoice.png"
           alt="شاشة فاتورة المبيعات — نظام مزايا ماكس"
-          onClick={handleImageClick}
-          className="w-full h-auto block select-none"
+          className="w-full h-auto block select-none rounded-lg"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* 6 Hotspots exactly as requested */}
@@ -273,7 +266,7 @@ export default function InteractiveScreenHotspots() {
           visibility: hidden;
           transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
           pointer-events: none;
-          border-right: 4px solid #38bdf8;
+          border-inline-start: 4px solid #38bdf8;
           z-index: 40;
         }
 
@@ -319,14 +312,19 @@ export default function InteractiveScreenHotspots() {
         /* Mobile responsiveness */
         @media (max-width: 600px) {
           .hotspot {
-            width: 20px;
-            height: 20px;
-            font-size: 10px;
+            width: 22px;
+            height: 22px;
+            font-size: 11px;
           }
           .tooltip-card {
-            width: 190px;
+            width: 180px;
+            font-size: 11.5px;
+            padding: 8px 10px;
+            line-height: 1.45;
+          }
+          .tooltip-card strong {
             font-size: 12px;
-            padding: 10px;
+            margin-bottom: 3px;
           }
         }
       `}</style>

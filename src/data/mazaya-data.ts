@@ -17,8 +17,6 @@ export interface SystemModule {
   accentColor: string;
   keyBenefits: string[];
   subFeatures: ModuleSubFeature[];
-  metricNumber: string;
-  metricLabel: string;
   videoId?: string;
 }
 
@@ -120,8 +118,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "الحل البرمجي الأقوى والأساسي من مزايا؛ يغطي الدورة  الكاملة للشركات التجارية والمعارض والمحلات؛ شاشات كاشير سريعة، كارت صنف لحظي، حسابات الموردين والعملاء، والربط مع الفاتورة الإلكترونية في السعودية ZATCA.",
     iconName: "ShoppingCart",
     accentColor: "#0A507A",
-    metricNumber: "0.8 ثانية",
-    metricLabel: "سرعة إصدار فواتير البيع والكاشير بالباركود",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "إدارة شاملة لدورة المبيعات (نقدي وآجل).",
@@ -164,8 +160,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "صُمم مزايا جلاس بالتعاون مع كبرى مصانع وورش الزجاج والألوميتال في مصر؛ يتولى حساب المقاسات بالملم والمتر المربع، توجيه تقطيع الألواح لتقليل الهدر إلى أدنى حد، وحساب مصنعيات التشغيل (شطف، دبل، سيكوريت، ثقوب).",
     iconName: "Layers",
     accentColor: "#0A507A",
-    metricNumber: "15% - 25%",
-    metricLabel: "توفير فعلي في هدر ألواح الزجاج عبر خوارزمية التقطيع",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       
@@ -208,8 +202,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "سواء بتدير مطعم ، كافيه، أو سلسلة فروع سريعة؛ مزايا ريستورانت بيوفرلك شاشات بيع لمس سريعة،  طابعات بونات المطبخ، .",
     iconName: "UtensilsCrossed",
     accentColor: "#F2C12E",
-    metricNumber: "100%",
-    metricLabel: "",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "شاشات كاشير لمس (Touch POS) فائقة السرعة مع صور الأصناف والمجموعات.",
@@ -252,8 +244,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "حل رقمي شامل للمدارس الخاصة والتجريبية والدولية؛ يجمع بين الدقة المحاسبية في تحصيل المصروفات المدرسية والأقساط، وإدارة شؤون الطلاب، الكنترول المدرسي، واشتراكات خطوط الباصات.",
     iconName: "GraduationCap",
     accentColor: "#0A507A",
-    metricNumber: "0 أخطاء",
-    metricLabel: "في تسوية أقساط أولياء الأمور وحسابات باصات المدارس",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "إدارة ملفات الطلاب وقيد التلاميذ وتوزيع الفصول والمراحل الدراسية.",
@@ -296,8 +286,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "مخصص لشركات التطوير والتسويق العقاري وإدارة الأملاك؛ متابعة حالة كل وحدة (متاحة، محجوزة، مباعة)، جدولة أقساط العملاء ومواعيد صرف الشيكات، وإدارة عقود الإيجار ومستخلصات التشطيب.",
     iconName: "Building2",
     accentColor: "#F2C12E",
-    metricNumber: "100%",
-    metricLabel: "حصر ومتابعة لمواعيد استحقاق الشيكات البنكية والأقساط",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "مخطط بصري تفاعلي للمشاريع والأبراج وحالة كل وحدة وشقة ومحل.",
@@ -340,8 +328,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "السيستم الأفضل للصالات الرياضية والأندية الصحية؛ تسجيل الاشتراكات بمختلف الباقات، ربط مباشر مع بوابات الدخول الإلكترونية وأجهزة البصمة لمنع دخول غير المسددين، مع متابعة باقات الـ PT ومبيعات بار البروتين.",
     iconName: "Dumbbell",
     accentColor: "#0A507A",
-    metricNumber: "0 تجاوزات",
-    metricLabel: "في دخول غير المشتركين عبر الربط مع بوابات Access Control",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "تسجيل اشتراكات الأعضاء بمختلف الباقات (شهر، 3 شهور، نصف سنوي، سنوي).",
@@ -384,8 +370,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "وإداري متكامل للقرى والمنتجعات السياحية والشقق الفندقية.",
     iconName: "Palmtree",
     accentColor: "#F2C12E",
-    metricNumber: "100%",
-    metricLabel: "ربط فواتير المطاعم والأنشطة بحساب الغرفة",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "مخطط تقويمي بصري للغرف.",
@@ -428,8 +412,6 @@ export const SYSTEM_MODULES: SystemModule[] = [
     heroSubtitle: "صُمم خصيصاً لتجار ومعارض الموتوسيكلات، التروسيكلات، السكوتر، والسيارات؛ تتبع دقيق لكل مركبة برقم الشاسيه ورقم الموتور، إدارة بيع الكاش والتقسيط المباشر مع استخراج الكمبيالات وإيصالات الأمانة، ومخازن قطع الغيار.",
     iconName: "Bike",
     accentColor: "#0A507A",
-    metricNumber: "100%",
-    metricLabel: "دقة مطابقة أرقام الشاسيه والموتور ومتابعة أقساط المركبات",
     videoId: "dQw4w9WgXcQ",
     keyBenefits: [
       "تسجيل المركبة برقم الشاسيه، رقم الموتور، اللون، الموديل، وبيانات الإفراج الجمركي.",

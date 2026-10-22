@@ -17,10 +17,10 @@ export default function FloatingWhatsApp() {
   )}`;
 
   return (
-    <div className="fixed bottom-6 start-6 z-50 flex flex-col items-start select-none">
+    <div className="fixed bottom-4 sm:bottom-6 end-4 sm:end-6 z-50 flex flex-col items-end select-none">
       {/* Popover Card */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+        <div className="mb-3 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
           {/* Card Header */}
           <div className="bg-gradient-to-r from-[#0A507A] to-[#06324D] text-white p-4">
             <div className="flex items-center justify-between">
@@ -107,23 +107,23 @@ export default function FloatingWhatsApp() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               متاحون للرد السريع عبر الواتساب
             </span>
-            <span>مصر 🇪🇬</span>
+            <span>مصر والسعودية 🇪🇬 🇸🇦</span>
           </div>
         </div>
       )}
 
-      {/* Main Trigger Button */}
+      {/* Main Trigger Button - Compact FAB on mobile, Full on desktop */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-elevated transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
+        className="group relative flex items-center gap-2 px-3 py-3 sm:px-4 sm:py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-medium shadow-elevated transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
         aria-label="تواصل عبر الواتساب"
       >
         <span className="absolute -top-1 -end-1 flex h-3.5 w-3.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
         </span>
-        <MessageCircle className="w-6 h-6 fill-white" />
-        <span className="text-xs sm:text-sm font-semibold tracking-wide">
+        <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
+        <span className="hidden sm:inline text-xs sm:text-sm font-semibold tracking-wide">
           تواصل معنا واتساب
         </span>
       </button>

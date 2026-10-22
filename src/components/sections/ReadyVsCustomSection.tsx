@@ -92,7 +92,7 @@ export default function ReadyVsCustomSection() {
                   "جاهز للعمل فوراً بدون فترات انتظار طويلة أو تكاليف تطوير كبيرة.",
                   "قواعد بيانات سريعة ومحمية ضد انقطاع الكهرباء وتلف الملفات.",
                   "شامل كافة تقارير الكاشير، كروت الأصناف، وكشوف حسابات العملاء.",
-                  "تحديثات دورية مجانية .",
+                  "تحديثات دورية مجانية وتطوير مستمر للأداء والأمان.",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
@@ -104,7 +104,7 @@ export default function ReadyVsCustomSection() {
 
             <Link
               href="#lead-capture"
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-slate-100 hover:bg-[#0A507A] text-slate-800 hover:text-white font-bold text-sm transition-all shadow-xs group"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-slate-100 hover:bg-[#0A507A] active:scale-[0.98] text-slate-800 hover:text-white font-bold text-sm transition-all shadow-xs group"
             >
               <span>طلب نسخة تجريبية فورية للبرامج الجاهزة</span>
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -176,7 +176,7 @@ export default function ReadyVsCustomSection() {
 
             <Link
               href="#lead-capture"
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-sm transition-all shadow-navy group border border-[#F2C12E]/30"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white font-bold text-sm transition-all shadow-navy group border border-[#F2C12E]/30"
             >
               <span>اطلب دراسة ومقايسة لنظامك المخصوص</span>
               <ArrowLeft className="w-4 h-4 text-[#F2C12E] group-hover:-translate-x-1 transition-transform" />

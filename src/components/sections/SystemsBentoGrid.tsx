@@ -97,10 +97,7 @@ export default function SystemsBentoGrid() {
               </div>
 
               {/* Card Footer Link */}
-              <div className="relative z-10 pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-500">
-                  {module.metricNumber}
-                </span>
+              <div className="relative z-10 pt-4 border-t border-slate-100 flex items-center justify-end">
                 <Link
                   href={`/systems/${module.slug}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A507A] group-hover:text-[#06324D] transition"
@@ -128,7 +125,7 @@ export default function SystemsBentoGrid() {
           </div>
           <Link
             href="/#lead-capture"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] text-slate-900 font-bold text-sm shadow-gold transition-transform hover:scale-105"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] active:scale-95 text-slate-900 font-bold text-sm shadow-gold transition-all hover:scale-105"
           >
             <span>احجز استشارة مجانية مع مهندس الأنظمة</span>
             <ArrowLeft className="w-4 h-4" />

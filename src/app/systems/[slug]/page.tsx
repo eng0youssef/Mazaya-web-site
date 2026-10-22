@@ -8,8 +8,10 @@ import {
   COMPANY_INFO, 
   SystemModule 
 } from "@/data/mazaya-data";
+import SystemRelatedVideos from "@/components/sections/SystemRelatedVideos";
 import { 
   ArrowLeft, 
+  ArrowRight,
   CheckCircle2, 
   Play, 
   Sparkles, 
@@ -200,16 +202,6 @@ export default function SystemDetailPage({ params }: PageProps) {
                 {currentModule.heroSubtitle}
               </p>
 
-              {/* Metric Callout */}
-              <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-soft inline-flex items-center gap-4">
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#0A507A] font-mono">
-                  {currentModule.metricNumber}
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-700">
-                  {currentModule.metricLabel}
-                </div>
-              </div>
-
               {/* CTAs */}
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
@@ -293,79 +285,11 @@ export default function SystemDetailPage({ params }: PageProps) {
 
       </section>
 
-      {/* Related Video Tutorials */}
-      <section className="py-16 bg-white border-t border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                شروحات فيديو لكيفية استخدام {currentModule.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-500">
-                فيديوهات توضيحية لتدريب فريق عملك على تشغيل السيستم بكل بساطة.
-              </p>
-            </div>
-            <Link
-              href="/videos"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A507A] hover:underline"
-            >
-              <span>مشاهدة كل الفيديوهات</span>
-              <ArrowLeft className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          {relatedVideos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedVideos.map((video) => (
-                <div
-                  key={video.id}
-                  className="bg-[#F8FAFC] rounded-2xl border border-slate-200 overflow-hidden shadow-soft"
-                >
-                  <div className="aspect-video bg-gradient-to-tr from-[#06324D] to-[#0A507A] flex items-center justify-center relative">
-                    <div className="w-12 h-12 rounded-full bg-[#F2C12E] text-slate-900 flex items-center justify-center shadow-gold">
-                      <Play className="w-5 h-5 fill-current ms-0.5" />
-                    </div>
-                    <span className="absolute bottom-2 end-2 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-mono">
-                      {video.duration}
-                    </span>
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-bold text-xs sm:text-sm text-slate-900 line-clamp-2">
-                      {video.title}
-                    </h4>
-                    <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                      {video.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#F0F7FB] border border-[#0A507A]/15 text-center space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-white text-[#0A507A] flex items-center justify-center mx-auto shadow-soft">
-                <Play className="w-6 h-6 text-[#F2C12E]" />
-              </div>
-              <h4 className="font-bold text-base sm:text-lg text-slate-800">
-                شروحات فيديو نظام {currentModule.title} جاري تجهيزها وتسجيلها حالياً
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-                مهندسو الدعم الفني في مزايا جاهزون لتقديم جلسة تدريب وشرح مباشر (عن بُعد أو حضورياً) لك ولموظفيك لمعاينة النظام وتجربته فورياً.
-              </p>
-              <div className="pt-2">
-                <Link
-                  href="/#lead-capture"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-xs shadow-soft transition"
-                >
-                  <span>طلب جلسة تدريب وديمو مباشر</span>
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-          )}
-
-        </div>
-      </section>
+      {/* Related Video Tutorials (Interactive with modal) */}
+      <SystemRelatedVideos
+        moduleTitle={currentModule.title}
+        videos={relatedVideos}
+      />
 
       {/* Module CTA Banner */}
       <section className="py-14 bg-gradient-to-r from-[#0A507A] to-[#06324D] text-white">

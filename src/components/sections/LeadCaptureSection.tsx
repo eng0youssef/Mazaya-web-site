@@ -10,7 +10,10 @@ import {
   Clock, 
   Building2, 
   User, 
-  Layers
+  Layers,
+  MessageCircle,
+  AlertCircle,
+  ArrowLeft
 } from "lucide-react";
 import { COMPANY_INFO, SYSTEM_MODULES } from "@/data/mazaya-data";
 
@@ -25,17 +28,46 @@ export default function LeadCaptureSection() {
     notes: "",
   });
 
+  const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const selectedModuleName = SYSTEM_MODULES.find(m => m.slug === formData.systemInterest)?.title || "نظام مخصص";
+
+  const directWhatsAppUrl = `https://wa.me/${COMPANY_INFO.whatsapp.sales}?text=${encodeURIComponent(
+    `أهلاً مزايا للبرمجيات، أرغب في طلب نسخة تجريبية فورية لـ: ${selectedModuleName}
+النشاط: ${formData.businessName || "غير محدد"}
+المسؤول: ${formData.contactName || "غير محدد"}
+عدد الفروع: ${formData.branchesCount}`
+  )}`;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError(null);
+
+    // Arabic Form Validation
+    if (!formData.businessName.trim() || formData.businessName.trim().length < 2) {
+      setFormError("يرجى كتابة اسم النشاط أو الشركة بشكل صحيح.");
+      return;
+    }
+
+    if (!formData.contactName.trim() || formData.contactName.trim().length < 2) {
+      setFormError("يرجى إدخال اسم المسؤول للتواصل.");
+      return;
+    }
+
+    const cleanPhone = formData.phone.replace(/[\s\-\+]/g, "");
+    if (!cleanPhone || cleanPhone.length < 10 || isNaN(Number(cleanPhone))) {
+      setFormError("يرجى إدخال رقم موبايل صحيح (10-11 رقماً) لنتواصل معك عبر الواتساب أو الهاتف.");
+      return;
+    }
+
     setIsLoading(true);
     // Simulate submission
     setTimeout(() => {
       setIsLoading(false);
       setIsSubmitted(true);
-    }, 800);
+    }, 600);
   };
 
   return (
@@ -49,23 +81,23 @@ export default function LeadCaptureSection() {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
               <Sparkles className="w-4 h-4 text-[#F2C12E]" />
               <span className="text-xs font-bold text-[#0A507A]">
-                نسخة تجريبية مجانية 
+                نسخة تجريبية مجانية 100%
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-              جاهز لتشغيل وتجربة السيستم في نشاطك؟ اطلب نسختك التجريبية الآن
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+              جاهز لتشغيل وتجربة السيستم في نشاطك؟ اطلب نسختك الآن
             </h2>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              سجل بيانات نشاطك التجاري وهيتم التواصل معاك خلال 15 دقيقة لتجهيز النسخة التجريبية لنظام مزايا المناسب لك وشرح طريقة الشغل خطوة بخطوة مجاناً.
+              سجل بيانات نشاطك وسيتواصل معك مهندس متخصص خلال 15 دقيقة لتثبيت النسخة التجريبية وشرح طريقة العمل خطوة بخطوة مجاناً على جهازك.
             </p>
 
             <div className="space-y-4 pt-2">
               {[
                 { title: "معاينة حية للنظام المتخصص بمجالك", desc: "سواء مزايا ماكس، جلاس، ريستورانت، أو موتو، هتشوف دورتك العملية كاملة." },
-                { title: "شرح كامل لأساسيات السيستم", desc: "نساعدك في فهم وتعلم الشغل على السيستم." },
-                { title: "دعم كامل لمنظومة الفاتورة والإيصال", desc: "جاهزون للربط القانوني المباشر مع مصلحة الضرائب السعودية." },
+                { title: "تدريب عملي وشروحات فيديو", desc: "نساعدك في تدريب موظفيك والكاشير على استخدام البرنامج بكل سهولة." },
+                { title: "دعم كامل لمنظومة الفاتورة والإيصال", desc: "جاهزون للربط القانوني المباشر مع الضرائب المصرية وهيئة الزكاة ZATCA." },
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -84,13 +116,13 @@ export default function LeadCaptureSection() {
                 <PhoneCall className="w-5 h-5" />
               </div>
               <div className="text-xs">
-                <span className="text-slate-500 block">تفضل الاتصال الهاتفي الفوري؟</span>
+                <span className="text-slate-500 block">تفضل الاتصال الهاتفي المباشر بقسم المبيعات؟</span>
                 <a
                   href={`tel:${COMPANY_INFO.phones.sales}`}
                   className="font-bold text-slate-900 hover:text-[#0A507A] text-sm"
                   dir="ltr"
                 >
-                  {COMPANY_INFO.phones.formattedSupport}
+                  {COMPANY_INFO.phones.formattedSales}
                 </a>
               </div>
             </div>
@@ -110,17 +142,28 @@ export default function LeadCaptureSection() {
                     تم استلام طلبك بنجاح!
                   </h3>
                   <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    شكراً لثقتك في مزايا للبرمجيات. سيقوم مهندس الدعم بالتواصل مع حضرتك على رقم الموبايل / الواتساب المسجل لتنسيق الديمو وتجربة السيستم.
+                    شكراً لثقتك في مزايا للبرمجيات. سيقوم مهندس المبيعات بالتواصل مع حضرتك على الرقم المسجل لتحديد موعد التجربة والشرح.
                   </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-4 px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition"
-                  >
-                    إرسال طلب آخر
-                  </button>
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                      href={directWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-soft transition"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-white" />
+                      <span>تأكيد الموعد فوراً عبر الواتساب</span>
+                    </a>
+                    <button
+                      onClick={() => setIsSubmitted(false)}
+                      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition"
+                    >
+                      إرسال طلب آخر
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div className="border-b border-slate-100 pb-4 mb-4">
                     <h3 className="font-bold text-lg text-slate-900">
                       طلب تجربة مجانية ومعرفة الأسعار
@@ -130,6 +173,14 @@ export default function LeadCaptureSection() {
                     </p>
                   </div>
 
+                  {/* Inline Arabic Validation Error Banner */}
+                  {formError && (
+                    <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-rose-800 text-xs font-semibold animate-in fade-in duration-200">
+                      <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
+                      <span>{formError}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Business Name */}
                     <div>
@@ -138,10 +189,12 @@ export default function LeadCaptureSection() {
                       </label>
                       <input
                         type="text"
-                        required
                         value={formData.businessName}
-                        onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                        placeholder="مثال: مصنع الزجاج الحديث أو مطعم الأصدقاء"
+                        onChange={(e) => {
+                          setFormData({ ...formData, businessName: e.target.value });
+                          if (formError) setFormError(null);
+                        }}
+                        placeholder="مثال: مصنع الزجاج الحديث أو سوبرماركت الأصدقاء"
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
                       />
                     </div>
@@ -153,9 +206,11 @@ export default function LeadCaptureSection() {
                       </label>
                       <input
                         type="text"
-                        required
                         value={formData.contactName}
-                        onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, contactName: e.target.value });
+                          if (formError) setFormError(null);
+                        }}
                         placeholder="أ / محمد أحمد"
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
                       />
@@ -170,12 +225,14 @@ export default function LeadCaptureSection() {
                       </label>
                       <input
                         type="tel"
-                        required
                         dir="ltr"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, phone: e.target.value });
+                          if (formError) setFormError(null);
+                        }}
                         placeholder="010XXXXXXXX"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white text-end"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white text-end font-mono"
                       />
                     </div>
 
@@ -226,24 +283,24 @@ export default function LeadCaptureSection() {
                         type="text"
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        placeholder="أي تفاصيل أخرى..."
+                        placeholder="أي تفاصيل خاصة بدورة عملك..."
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
                       />
                     </div>
                   </div>
 
-                  {/* Submit Button */}
+                  {/* Primary Submit Button */}
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full py-3.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white font-bold text-sm shadow-navy hover:shadow-lg transition-all flex items-center justify-center gap-2 border border-[#F2C12E]/30"
+                    className="w-full py-3.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white font-bold text-sm shadow-navy hover:shadow-lg transition-all flex items-center justify-center gap-2 border border-[#F2C12E]/30"
                   >
                     {isLoading ? (
                       <span>جاري إرسال الطلب...</span>
                     ) : (
                       <>
                         <span>إرسال طلب الديمو المجاني الآن</span>
-                        <Send className="w-4 h-4 text-[#F2C12E] -rotate-45" />
+                        <ArrowLeft className="w-4 h-4 text-[#F2C12E]" />
                       </>
                     )}
                   </button>

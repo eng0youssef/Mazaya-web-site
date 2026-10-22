@@ -47,6 +47,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
@@ -200,17 +211,21 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center gap-3">
             <a
               href={`tel:${COMPANY_INFO.phones.sales}`}
-              className="hidden xl:flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-[#0A507A] px-2 py-1.5 rounded-lg transition"
+              className="hidden xl:flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-[#0A507A] px-2.5 py-1.5 rounded-lg hover:bg-slate-50 transition"
+              title="اتصل بإدارة المبيعات فوراً"
             >
-              <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-[#0A507A]">
+              <div className="w-7 h-7 rounded-full bg-[#0A507A]/10 flex items-center justify-center text-[#0A507A]">
                 <PhoneCall className="w-3.5 h-3.5" />
               </div>
-              <span dir="ltr">{COMPANY_INFO.phones.formattedSupport}</span>
+              <div className="flex flex-col text-start">
+                <span className="text-[10px] text-slate-400 font-normal">المبيعات</span>
+                <span dir="ltr" className="font-bold text-slate-800">{COMPANY_INFO.phones.formattedSales}</span>
+              </div>
             </a>
 
             <Link
               href="/#lead-capture"
-              className="relative inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/30"
+              className="relative inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/30"
             >
               <span>اطلب نسخة تجريبية</span>
               <span className="w-2 h-2 rounded-full bg-[#F2C12E] animate-pulse"></span>
@@ -221,13 +236,13 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-2">
             <Link
               href="/#lead-capture"
-              className="px-3 py-1.5 rounded-lg bg-[#0A507A] text-white text-xs font-bold"
+              className="px-3 py-1.5 rounded-lg bg-[#0A507A] active:scale-[0.98] text-white text-xs font-bold shadow-xs"
             >
               ديمو مجاني
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition"
+              className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-slate-200 active:scale-95 transition"
               aria-label="القائمة الرئيسية"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -237,78 +252,84 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation (Sheet) */}
+      {/* Mobile Drawer Navigation (Sheet) with Overlay */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 shadow-xl px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top duration-200">
-          <div className="space-y-1">
-            <div className="px-3 py-2 text-xs font-bold text-slate-400">الأنظمة التخصصية:</div>
-            <div className="grid grid-cols-2 gap-2">
-              {SYSTEM_MODULES.map((module) => (
-                <Link
-                  key={module.id}
-                  href={`/systems/${module.slug}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-2 p-2 rounded-lg bg-slate-50 text-xs font-bold text-slate-800 hover:bg-[#F0F7FB] hover:text-[#0A507A]"
-                >
-                  <span className="text-[10px] text-[#F2C12E] font-mono">{module.number}</span>
-                  <span className="truncate">{module.title}</span>
-                </Link>
-              ))}
+        <>
+          <div
+            className="fixed inset-0 top-[65px] bg-slate-900/40 backdrop-blur-xs z-30 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="lg:hidden relative z-40 bg-white border-b border-slate-200 shadow-2xl px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-70px)] overflow-y-auto">
+            <div className="space-y-1">
+              <div className="px-3 py-1.5 text-xs font-bold text-slate-400">الأنظمة التخصصية:</div>
+              <div className="grid grid-cols-2 gap-2">
+                {SYSTEM_MODULES.map((module) => (
+                  <Link
+                    key={module.id}
+                    href={`/systems/${module.slug}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 text-xs font-bold text-slate-800 hover:bg-[#F0F7FB] hover:text-[#0A507A] active:scale-[0.98] border border-slate-100 transition"
+                  >
+                    <span className="text-[10px] text-[#F2C12E] font-mono font-extrabold">{module.number}</span>
+                    <span className="truncate">{module.title}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-slate-100 pt-3 space-y-1 text-sm font-semibold">
+              <Link
+                href="/#ready-vs-custom"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#0A507A]"
+              >
+                أنظمة مفصلة خصيصاً (Custom ERP)
+              </Link>
+              <Link
+                href="/videos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block px-3 py-2.5 rounded-xl ${
+                  pathname === "/videos"
+                    ? "text-[#0A507A] bg-[#0A507A]/10 font-bold"
+                    : "text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                فيديوهات الشرح والتدريب
+              </Link>
+              <Link
+                href="/#support-hub"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#0A507A]"
+              >
+                الدعم الفني عن بُعد
+              </Link>
+              <Link
+                href="/#faq"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-3 py-2.5 rounded-xl text-slate-700 hover:bg-slate-50 hover:text-[#0A507A]"
+              >
+                الأسئلة الشائعة
+              </Link>
+            </div>
+
+            <div className="border-t border-slate-100 pt-3 flex flex-col gap-2">
+              <a
+                href={`tel:${COMPANY_INFO.phones.sales}`}
+                className="flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-100 active:scale-[0.98] text-slate-800 text-xs font-bold transition"
+              >
+                <PhoneCall className="w-4 h-4 text-[#0A507A]" />
+                <span>اتصل بالمبيعات: <strong dir="ltr">{COMPANY_INFO.phones.formattedSales}</strong></span>
+              </a>
+              <Link
+                href="/#lead-capture"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center py-3 rounded-xl bg-[#0A507A] active:scale-[0.98] text-white text-xs font-bold shadow-md transition"
+              >
+                طلب نسخة تجريبية فورية
+              </Link>
             </div>
           </div>
-
-          <div className="border-t border-slate-100 pt-3 space-y-2">
-            <Link
-              href="/#ready-vs-custom"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              أنظمة مفصلة خصيصاً (Custom ERP)
-            </Link>
-            <Link
-              href="/videos"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`block px-3 py-2 rounded-lg text-sm font-semibold ${
-                pathname === "/videos"
-                  ? "text-[#0A507A] bg-[#0A507A]/10 font-bold"
-                  : "text-slate-700 hover:bg-slate-50"
-              }`}
-            >
-              فيديوهات الشرح والتدريب
-            </Link>
-            <Link
-              href="/#support-hub"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              الدعم الفني عن بُعد
-            </Link>
-            <Link
-              href="/#faq"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              الأسئلة الشائعة
-            </Link>
-          </div>
-
-          <div className="border-t border-slate-100 pt-3 flex flex-col gap-2">
-            <a
-              href={`tel:${COMPANY_INFO.phones.sales}`}
-              className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-100 text-slate-800 text-xs font-bold"
-            >
-              <PhoneCall className="w-4 h-4 text-[#0A507A]" />
-              <span>اتصل بالمبيعات: {COMPANY_INFO.phones.formattedSales}</span>
-            </a>
-            <Link
-              href="/#lead-capture"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-center py-2.5 rounded-xl bg-[#0A507A] text-white text-xs font-bold shadow-md"
-            >
-              طلب نسخة تجريبية فورية
-            </Link>
-          </div>
-        </div>
+        </>
       )}
     </header>
   );

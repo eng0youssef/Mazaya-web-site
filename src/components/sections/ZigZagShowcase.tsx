@@ -117,6 +117,8 @@ export default function ZigZagShowcase() {
                   src="/screenshots/mazaya-item-card-report.png"
                   alt="تقرير كارت الصنف التفصيلي في نظام مزايا ماكس"
                   className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {/* Hover zoom pill overlay */}
                 <div className="absolute inset-0 bg-slate-900/15 opacity-0 group-hover/zoom:opacity-100 transition-opacity rounded-xl flex items-center justify-center pointer-events-none">
@@ -282,6 +284,8 @@ export default function ZigZagShowcase() {
                   src="/screenshots/mazaya-treasury-report.png"
                   alt="تقرير كشف حساب الخزينة في نظام مزايا ماكس"
                   className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {/* Hover zoom pill overlay */}
                 <div className="absolute inset-0 bg-slate-900/15 opacity-0 group-hover/zoom:opacity-100 transition-opacity rounded-xl flex items-center justify-center pointer-events-none">

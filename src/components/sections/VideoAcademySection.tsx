@@ -12,7 +12,8 @@ import {
   Tag,
   Dumbbell,
   CheckCircle2,
-  FolderOpen
+  FolderOpen,
+  ArrowLeft
 } from "lucide-react";
 import { 
   VIDEO_TUTORIALS, 
@@ -192,7 +193,7 @@ export default function VideoAcademySection() {
 
                   <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-bold text-[#0A507A]">
                     <span>تشغيل الفيديو الآن</span>
-                    <span className="group-hover:-translate-x-1 transition-transform">←</span>
+                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>
