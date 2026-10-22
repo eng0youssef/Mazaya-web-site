@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { TRUST_METRICS } from "@/data/mazaya-data";
 import VideoModal from "@/components/ui/VideoModal";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 export default function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -71,10 +72,15 @@ export default function HeroSection() {
           >
             <Link
               href="#lead-capture"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white font-bold text-sm sm:text-base shadow-navy hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/40"
+              className="relative overflow-hidden group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white font-bold text-sm sm:text-base shadow-navy hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/40"
             >
-              <span>اطلب ديمو مجاني الآن</span>
-              <ArrowLeft className="w-5 h-5 text-[#F2C12E]" />
+              {/* Shimmer Light Beam */}
+              <div 
+                aria-hidden="true" 
+                className="pointer-events-none absolute inset-y-0 -left-1/4 w-[150%] bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer-sweep" 
+              />
+              <span className="relative z-10">اطلب ديمو مجاني الآن</span>
+              <ArrowLeft className="relative z-10 w-5 h-5 text-[#F2C12E] group-hover:-translate-x-1 transition-transform" />
             </Link>
 
             <button
@@ -111,9 +117,12 @@ export default function HeroSection() {
                 data-aos-delay={300 + idx * 80}
                 className="flex flex-col items-center text-center p-3 rounded-2xl bg-white/60 border border-slate-200/60 shadow-xs hover:shadow-soft transition-all"
               >
-                <span className="text-2xl sm:text-3xl font-extrabold text-[#0A507A]">
-                  {metric.value}
-                </span>
+                <AnimatedCounter
+                  value={metric.value}
+                  duration={3500}
+                  delay={300 + idx * 80}
+                  className="text-2xl sm:text-3xl font-extrabold text-[#0A507A]"
+                />
                 <span className="text-xs sm:text-sm font-bold text-slate-800 mt-1">
                   {metric.label}
                 </span>

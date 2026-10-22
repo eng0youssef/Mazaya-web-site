@@ -225,10 +225,15 @@ export default function Navbar() {
 
             <Link
               href="/#lead-capture"
-              className="relative inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/30"
+              className="relative overflow-hidden group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0A507A] hover:bg-[#06324D] active:scale-[0.98] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-[#F2C12E]/30"
             >
-              <span>اطلب نسخة تجريبية</span>
-              <span className="w-2 h-2 rounded-full bg-[#F2C12E] animate-pulse"></span>
+              {/* Shimmer Light Beam */}
+              <div 
+                aria-hidden="true" 
+                className="pointer-events-none absolute inset-y-0 -left-1/4 w-[150%] bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer-sweep" 
+              />
+              <span className="relative z-10">اطلب نسخة تجريبية</span>
+              <span className="relative z-10 w-2 h-2 rounded-full bg-[#F2C12E] animate-pulse"></span>
             </Link>
           </div>
 
@@ -236,9 +241,13 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-2">
             <Link
               href="/#lead-capture"
-              className="px-3 py-1.5 rounded-lg bg-[#0A507A] active:scale-[0.98] text-white text-xs font-bold shadow-xs"
+              className="relative overflow-hidden group px-3 py-1.5 rounded-lg bg-[#0A507A] active:scale-[0.98] text-white text-xs font-bold shadow-xs"
             >
-              ديمو مجاني
+              <div 
+                aria-hidden="true" 
+                className="pointer-events-none absolute inset-y-0 -left-1/4 w-[150%] bg-gradient-to-r from-transparent via-white/25 to-transparent animate-shimmer-sweep" 
+              />
+              <span className="relative z-10">ديمو مجاني</span>
             </Link>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

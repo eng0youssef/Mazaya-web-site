@@ -138,3 +138,18 @@ body {
     transform: translate3d(0, 0, 0) !important;
   }
 }
+
+/* Shimmer Sweep Effect for CTA Buttons */
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-160%) skewX(-25deg);
+  }
+  30%, 100% {
+    transform: translateX(220%) skewX(-25deg);
+  }
+}
+
+.animate-shimmer-sweep {
+  animation: shimmer-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
