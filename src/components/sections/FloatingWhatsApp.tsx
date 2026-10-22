@@ -17,10 +17,21 @@ export default function FloatingWhatsApp() {
   )}`;
 
   return (
-    <div className="fixed bottom-4 sm:bottom-6 end-4 sm:end-6 z-50 flex flex-col items-end select-none">
+    <div
+      className="select-none"
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        zIndex: 99999,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+      }}
+    >
       {/* Popover Card */}
       {isOpen && (
-        <div className="mb-3 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+        <div className="mb-3 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200 text-right">
           {/* Card Header */}
           <div className="bg-gradient-to-r from-[#0A507A] to-[#06324D] text-white p-4">
             <div className="flex items-center justify-between">
@@ -40,8 +51,9 @@ export default function FloatingWhatsApp() {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={() => setIsOpen(false)}
-                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition cursor-pointer"
                 aria-label="إغلاق"
               >
                 <X className="w-4 h-4" />
@@ -112,18 +124,24 @@ export default function FloatingWhatsApp() {
         </div>
       )}
 
-      {/* Main Trigger Button - Compact FAB on mobile, Full on desktop */}
+      {/* Main Trigger Button */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex items-center gap-2 px-3 py-3 sm:px-4 sm:py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-medium shadow-elevated transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
+        className="group relative flex items-center gap-2.5 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full active:scale-95 text-white font-bold transition-all transform hover:scale-105 focus:outline-none cursor-pointer"
+        style={{
+          backgroundColor: "#25D366",
+          color: "#ffffff",
+          boxShadow: "0 10px 25px -3px rgba(0, 0, 0, 0.35)",
+        }}
         aria-label="تواصل عبر الواتساب"
       >
-        <span className="absolute -top-1 -end-1 flex h-3.5 w-3.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
+        <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border-2 border-white"></span>
         </span>
-        <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 fill-white" />
-        <span className="hidden sm:inline text-xs sm:text-sm font-semibold tracking-wide">
+        <MessageCircle className="w-6 h-6 fill-white" />
+        <span className="text-xs sm:text-sm font-bold tracking-wide">
           تواصل معنا واتساب
         </span>
       </button>

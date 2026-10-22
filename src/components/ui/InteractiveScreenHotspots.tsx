@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { ZoomIn } from "lucide-react";
+import { ZoomIn, Receipt } from "lucide-react";
 import ImageLightboxModal from "./ImageLightboxModal";
 
 interface HotspotData {
@@ -87,62 +87,93 @@ export default function InteractiveScreenHotspots() {
   }, []);
 
   return (
-    <div className="interactive-showcase-container w-full py-6">
-      <div ref={wrapperRef} className="screen-wrapper">
-        {/* Real Screenshot */}
-        <img
-          src="/screenshots/mazaya-pos-invoice.png"
-          alt="شاشة فاتورة المبيعات — نظام مزايا ماكس"
-          className="w-full h-auto block select-none rounded-lg"
-          loading="lazy"
-          decoding="async"
-        />
+    <div className="interactive-showcase-container w-full">
+      {/* Luxury Modern Desktop Window Frame matching reports */}
+      <div className="relative bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden group hover:border-[#0A507A]/40 transition-all duration-300 text-start">
+        
+        {/* Desktop Window Header Strip */}
+        <div className="flex items-center justify-between px-4 py-3 bg-slate-100/90 border-b border-slate-200 text-xs select-none">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block shadow-2xs" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block shadow-2xs" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-2xs" />
+            <span className="font-bold text-slate-800 ms-2 flex items-center gap-1.5">
+              <Receipt className="w-4 h-4 text-[#0A507A]" />
+              <span>شاشة نقاط البيع وفاتورة المبيعات — نظام مزايا ماكس</span>
+            </span>
+          </div>
+          <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            استجابة فورية
+          </span>
+        </div>
 
-        {/* 6 Hotspots exactly as requested */}
-        {HOTSPOTS.map((h) => {
-          const isActive = activeHotspotId === h.id;
+        {/* Screen Content Wrapper */}
+        <div className="p-3 sm:p-4 bg-gradient-to-b from-[#F8FAFC] to-white">
+          <div
+            ref={wrapperRef}
+            onClick={() => setIsZoomOpen(true)}
+            className="screen-wrapper cursor-zoom-in relative group/pos"
+            title="اضغط في أي مكان لتكبير الشاشة بدقة كاملة"
+          >
+            {/* Real Screenshot */}
+            <img
+              src="/screenshots/mazaya-pos-invoice.png"
+              alt="شاشة فاتورة المبيعات — نظام مزايا ماكس"
+              className="w-full h-auto block select-none rounded-xl group-hover/pos:scale-[1.005] transition-transform duration-200"
+              loading="lazy"
+              decoding="async"
+            />
 
-          return (
-            <div
-              key={h.id}
-              style={{ top: h.top, left: h.left }}
+
+
+            {/* 6 Hotspots */}
+            {HOTSPOTS.map((h) => {
+              const isActive = activeHotspotId === h.id;
+
+              return (
+                <div
+                  key={h.id}
+                  style={{ top: h.top, left: h.left }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveHotspotId((prev) => (prev === h.id ? null : h.id));
+                  }}
+                  className={`hotspot ${h.isBottom ? "tooltip-bottom" : ""} ${
+                    isActive ? "active" : ""
+                  }`}
+                >
+                  {h.id}
+
+                  <div
+                    className="tooltip-card"
+                    style={h.tooltipCustomStyle || {}}
+                  >
+                    <strong>{h.title}</strong>
+                    {h.desc}
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Floating Zoom Button */}
+            <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setActiveHotspotId((prev) => (prev === h.id ? null : h.id));
+                setIsZoomOpen(true);
               }}
-              className={`hotspot ${h.isBottom ? "tooltip-bottom" : ""} ${
-                isActive ? "active" : ""
-              }`}
+              className="absolute bottom-3 start-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-md transition-all hover:scale-105 cursor-pointer"
+              title="اضغط لتكبير الشاشة بدقة كاملة"
             >
-              {h.id}
-
-              <div
-                className="tooltip-card"
-                style={h.tooltipCustomStyle || {}}
-              >
-                <strong>{h.title}</strong>
-                {h.desc}
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Floating Zoom Button */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsZoomOpen(true);
-          }}
-          className="absolute bottom-3 start-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-md transition-all hover:scale-105 cursor-pointer"
-          title="اضغط لتكبير الشاشة بدقة كاملة"
-        >
-          <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
-          <span>تكبير الشاشة</span>
-        </button>
+              <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
+              <span>تكبير الشاشة</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Lightbox Modal for Full-Resolution Viewing */}
+      {/* Lightbox Modal for Full-Resolution Viewing (Portal-enabled) */}
       <ImageLightboxModal
         isOpen={isZoomOpen}
         onClose={() => setIsZoomOpen(false)}
@@ -152,12 +183,11 @@ export default function InteractiveScreenHotspots() {
         subtitle="معاينة عالية الدقة لكافة حقول الفاتورة، الباركود، وطرق السداد"
       />
 
-      {/* Scoped CSS implementing the exact design and animations requested by user */}
+      {/* Scoped CSS */}
       <style jsx>{`
         .interactive-showcase-container {
           max-width: 1000px;
           margin: 0 auto;
-          text-align: center;
         }
 
         .screen-wrapper {
@@ -165,16 +195,16 @@ export default function InteractiveScreenHotspots() {
           display: inline-block;
           width: 100%;
           border-radius: 12px;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-          border: 3px solid #ffffff;
-          background: #e8f5e9;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          background: #ffffff;
         }
 
         .screen-wrapper img {
           width: 100%;
           height: auto;
           display: block;
-          border-radius: 9px;
+          border-radius: 11px;
         }
 
         /* Hotspot Pin */
@@ -188,7 +218,7 @@ export default function InteractiveScreenHotspots() {
           border-radius: 50%;
           cursor: pointer;
           transform: translate(-50%, -50%);
-          z-index: 10;
+          z-index: 15;
           display: flex;
           align-items: center;
           justify-content: center;

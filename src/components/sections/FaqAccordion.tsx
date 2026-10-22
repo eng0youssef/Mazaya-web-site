@@ -8,7 +8,7 @@ export default function FaqAccordion() {
   const [openId, setOpenId] = useState<string | null>("faq-1");
 
   const toggleAccordion = (id: string) => {
-    setOpenId(openId === id ? null : id);
+    setOpenId((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -33,15 +33,13 @@ export default function FaqAccordion() {
           </p>
         </div>
 
-        {/* Accordion List */}
-        <div className="space-y-4">
-          {FAQ_ITEMS.map((item, idx) => {
+        {/* Accordion List (Animated as a whole, items never lose visibility) */}
+        <div data-aos="fade-up" data-aos-delay="100" className="space-y-4">
+          {FAQ_ITEMS.map((item) => {
             const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
-                data-aos="fade-up"
-                data-aos-delay={(idx % 5) * 60}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
                     ? "bg-[#F8FAFC] border-[#0A507A]/40 shadow-soft"
@@ -49,8 +47,9 @@ export default function FaqAccordion() {
                 }`}
               >
                 <button
+                  type="button"
                   onClick={() => toggleAccordion(item.id)}
-                  className="w-full p-5 text-start flex items-center justify-between gap-4 focus:outline-none"
+                  className="w-full p-5 text-start flex items-center justify-between gap-4 focus:outline-none cursor-pointer"
                   aria-expanded={isOpen}
                 >
                   <span className="font-bold text-sm sm:text-base text-slate-900 leading-snug">
@@ -78,7 +77,7 @@ export default function FaqAccordion() {
         </div>
 
         {/* Still have questions CTA */}
-        <div className="mt-10 p-5 rounded-2xl bg-[#F0F7FB] border border-[#0A507A]/15 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div data-aos="fade-up" data-aos-delay="150" className="mt-10 p-5 rounded-2xl bg-[#F0F7FB] border border-[#0A507A]/15 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 text-slate-800 text-xs sm:text-sm font-semibold">
             <MessageSquare className="w-5 h-5 text-[#0A507A]" />
             <span>عندك سؤال تاني مش موجود هنا؟ فريق المبيعات متاح للإجابة فوراً.</span>

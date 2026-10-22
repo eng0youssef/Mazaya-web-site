@@ -11,9 +11,9 @@ import {
   Dumbbell, 
   Palmtree, 
   Bike, 
-  ArrowLeft,
-  CheckCircle2,
-  Sparkles
+  ArrowLeft, 
+  CheckCircle2, 
+  Sparkles 
 } from "lucide-react";
 import { SYSTEM_MODULES } from "@/data/mazaya-data";
 
@@ -30,7 +30,7 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function SystemsBentoGrid() {
   return (
-    <section id="systems" className="py-16 lg:py-24 bg-[#F8FAFC] relative">
+    <section id="systems" className="py-16 lg:py-24 bg-[#F8FAFC] relative border-b border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -105,7 +105,7 @@ export default function SystemsBentoGrid() {
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0A507A] group-hover:text-[#06324D] transition"
                 >
                   <span>تفاصيل النظام</span>
-                  <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+                  <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform text-[#F2C12E]" />
                 </Link>
               </div>
 
@@ -116,7 +116,7 @@ export default function SystemsBentoGrid() {
         </div>
 
         {/* Global systems prompt callout */}
-        <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-[#0A507A] to-[#06324D] text-white shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
+        <div data-aos="fade-up" className="mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0A507A] to-[#06324D] text-white shadow-card flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-start">
             <h4 className="text-lg sm:text-xl font-bold">
               نشاطك التجاري مش موجود في القائمة أو محتاج تعديل خاص؟
@@ -127,7 +127,7 @@ export default function SystemsBentoGrid() {
           </div>
           <Link
             href="/#lead-capture"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] active:scale-95 text-slate-900 font-bold text-sm shadow-gold transition-all hover:scale-105"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] active:scale-95 text-slate-900 font-bold text-sm shadow-gold transition-all hover:scale-105"
           >
             <span>احجز استشارة مجانية مع مهندس الأنظمة</span>
             <ArrowLeft className="w-4 h-4" />
