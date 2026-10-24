@@ -47,11 +47,16 @@ export default function HeroSection() {
             data-aos-delay="100"
             className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.25] tracking-tight max-w-4xl"
           >
-            ظبّط <span className="text-[#0A507A]">مبيعاتك</span>،{" "}
-            <span className="text-[#0A507A]">مخازنك</span>، وحساباتك{" "}
-            <span className="relative whitespace-nowrap inline-block">
-              <span className="relative z-10 text-slate-900">بدقة وسرعة</span>
-              <span className="absolute bottom-1.5 start-0 w-full h-3.5 bg-[#F2C12E]/40 -z-0 rounded-sm"></span>
+            <span className="block text-xl sm:text-3xl md:text-4xl font-black text-[#0A507A] mb-3">
+              شركة مزايا للبرمجيات — نظام مزايا ماكس ERP
+            </span>
+            <span className="block">
+              ظبّط <span className="text-[#0A507A]">مبيعاتك</span>،{" "}
+              <span className="text-[#0A507A]">مخازنك</span>، وحساباتك{" "}
+              <span className="relative whitespace-nowrap inline-block">
+                <span className="relative z-10 text-slate-900">بدقة وسرعة</span>
+                <span className="absolute bottom-1.5 start-0 w-full h-3.5 bg-[#F2C12E]/40 -z-0 rounded-sm"></span>
+              </span>
             </span>
           </h1>
 

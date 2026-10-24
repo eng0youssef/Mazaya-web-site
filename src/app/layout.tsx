@@ -27,6 +27,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mazaya-max.vercel.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "مزايا للبرمجيات | أنظمة الكاشير وإدارة المخازن والـ ERP المتكاملة",
+  applicationName: "مزايا للبرمجيات",
   description: "المنظومة البرمجية المتكاملة لإدارة المبيعات، المخازن، الخزينة، الحسابات العامة، والفاتورة والإيصال الإلكتروني في مصر والوطن العربي. برامج جاهزة للتشغيل الفوري مع إمكانية تفصيل وبرمجة أنظمة مخصصة ودعم فني مباشر.",
   icons: {
     icon: [
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
     title: "مزايا للبرمجيات | أنظمة الكاشير وإدارة المخازن والـ ERP المتكاملة",
     description: "المنظومة البرمجية المتكاملة لإدارة المبيعات، المخازن، الخزينة، والحسابات العامة. برامج جاهزة فوراً ومتوافقة مع الفاتورة الإلكترونية وهيئة الزكاة ZATCA.",
     url: SITE_URL,
-    siteName: "مزايا للبرمجيات (Mazaya for programming)",
+    siteName: "مزايا للبرمجيات",
     locale: "ar_EG",
     type: "website",
     images: [
@@ -104,6 +105,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "مزايا للبرمجيات",
+  "alternateName": ["Mazaya Max", "مزايا ماكس", "شركة مزايا للبرمجيات"],
+  "url": "https://mazaya-max.vercel.app/"
 };
 
 const jsonLd = {
@@ -163,6 +172,12 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" className={ibmPlexArabic.variable}>
       <head>
+        <meta property="og:site_name" content="مزايا للبرمجيات" />
+        <meta name="application-name" content="مزايا للبرمجيات" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
