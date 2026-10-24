@@ -7,7 +7,6 @@ import {
   Sparkles, 
   PhoneCall, 
   Clock, 
-  MessageCircle, 
   AlertCircle, 
   ArrowLeft,
   Loader2
@@ -31,14 +30,6 @@ export default function LeadCaptureSection() {
   const selectedModuleName = formData.systemInterest === "custom"
     ? "تفصيل وبرمجة سيستم مخصص (Custom ERP)"
     : SYSTEM_MODULES.find(m => m.slug === formData.systemInterest)?.title || "نظام مزايا ماكس ERP";
-
-  const directWhatsAppUrl = `https://wa.me/${COMPANY_INFO.whatsapp.sales}?text=${encodeURIComponent(
-    `أهلاً شركة مزايا للبرمجيات، أرغب في تأكيد طلب الديمو المجاني:
-النشاط: ${formData.businessName || "غير محدد"}
-المسؤول: ${formData.contactName || "غير محدد"}
-النظام المطلوب: ${selectedModuleName}
-عدد الفروع: ${formData.branchesCount}`
-  )}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,26 +148,25 @@ export default function LeadCaptureSection() {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative">
               
               {isSubmitted ? (
-                <div className="py-12 text-center space-y-4 animate-in fade-in duration-300">
+                <div className="py-12 text-center space-y-5 animate-in fade-in duration-300">
                   <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-soft">
                     <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                    تم استلام طلبك وإرساله لفريق المبيعات بنجاح!
-                  </h3>
-                  <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    شكراً لثقتك في مزايا للبرمجيات. تم تسجيل طلبك في جدول المتابعة وسيقوم مهندس المبيعات بالتواصل مع حضرتك على رقم ({formData.phone}) لشرح وتجربة السيستم.
-                  </p>
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a
-                      href={directWhatsAppUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-soft transition"
-                    >
-                      <MessageCircle className="w-4 h-4 fill-white" />
-                      <span>تأكيد الموعد فوراً عبر الواتساب</span>
-                    </a>
+                  <div className="space-y-2">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+                      تم استلام طلبك وإرساله لفريق المبيعات بنجاح!
+                    </h3>
+                    <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                      شكراً لثقتك في شركة مزايا للبرمجيات. تم تسجيل بيانات نشاطك بنجاح، وسيتواصل معك أحد مهندسينا هاتفياً على رقم ({formData.phone}) لشرح وتجربة السيستم.
+                    </p>
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
+                    <Clock className="w-4 h-4 text-emerald-600" />
+                    <span>سيتواصل معك مهندس متخصص خلال 15 دقيقة</span>
+                  </div>
+
+                  <div className="pt-3">
                     <button
                       onClick={() => {
                         setIsSubmitted(false);
@@ -189,7 +179,7 @@ export default function LeadCaptureSection() {
                           notes: "",
                         });
                       }}
-                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition"
+                      className="px-7 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition shadow-xs"
                     >
                       إرسال طلب آخر
                     </button>
