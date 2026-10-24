@@ -48,7 +48,7 @@ export default function HeroSection() {
             className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.25] tracking-tight max-w-4xl"
           >
             <span className="block text-xl sm:text-3xl md:text-4xl font-black text-[#0A507A] mb-3">
-              شركة مزايا للبرمجيات — نظام مزايا ماكس ERP
+              شركة مزايا للبرمجيات
             </span>
             <span className="block">
               ظبّط <span className="text-[#0A507A]">مبيعاتك</span>،{" "}

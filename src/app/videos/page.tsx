@@ -5,9 +5,44 @@ import { Home, ArrowLeft, PhoneCall } from "lucide-react";
 import VideoAcademySection from "@/components/sections/VideoAcademySection";
 import { COMPANY_INFO } from "@/data/mazaya-data";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mazaya-max.vercel.app";
+
 export const metadata: Metadata = {
   title: "فيديوهات الشرح والتدريب | شركة مزايا للبرمجيات",
   description: "مكتبة فيديوهات تدريبية وشروحات تفصيلية لكافة شاشات وموديولات برامج مزايا لإدارة المبيعات، الكاشير، الحسابات، والمخازن.",
+  keywords: [
+    "شركة مزايا للبرمجيات",
+    "فيديوهات شرح برنامج كاشير",
+    "تدريب برنامج مزايا ماكس",
+    "شرح برنامج الحسابات والمخازن",
+    "فيديوهات ERP",
+    "كاشير بالباركود",
+  ],
+  alternates: {
+    canonical: `${SITE_URL}/videos`,
+  },
+  openGraph: {
+    title: "فيديوهات الشرح والتدريب | شركة مزايا للبرمجيات",
+    description: "مكتبة فيديوهات تدريبية وشروحات تفصيلية لكافة شاشات وموديولات برامج مزايا لإدارة المبيعات، الكاشير، الحسابات، والمخازن.",
+    url: `${SITE_URL}/videos`,
+    siteName: "مزايا للبرمجيات",
+    locale: "ar_EG",
+    type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "فيديوهات الشرح والتدريب — شركة مزايا للبرمجيات",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "فيديوهات الشرح والتدريب | شركة مزايا للبرمجيات",
+    description: "مكتبة فيديوهات تدريبية وشروحات تفصيلية لكافة شاشات وموديولات برامج مزايا لإدارة المبيعات، الكاشير، الحسابات، والمخازن.",
+    images: ["/logo.png"],
+  },
   icons: {
     icon: "/favicon-circle.png?v=3",
     shortcut: "/favicon-circle.png?v=3",
@@ -16,8 +51,31 @@ export const metadata: Metadata = {
 };
 
 export default function VideosPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "فيديوهات الشرح والتدريب",
+        "item": `${SITE_URL}/videos`,
+      },
+    ],
+  };
+
   return (
     <div className="w-full flex flex-col bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Top Breadcrumb Header Bar */}
       <div className="bg-[#F8FAFC] border-b border-slate-200/80 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -75,13 +75,53 @@ export async function generateStaticParams() {
   }));
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mazaya-max.vercel.app";
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const module = SYSTEM_MODULES.find((m) => m.slug === params.slug);
-  if (!module) return { title: "النظام غير موجود | مزايا للبرمجيات" };
+  if (!module) return { title: "النظام غير موجود | شركة مزايا للبرمجيات" };
+
+  const pageUrl = `${SITE_URL}/systems/${module.slug}`;
+  const title = `${module.title} — ${module.badge} | شركة مزايا للبرمجيات`;
+  const description = `${module.heroSubtitle} نظام محاسبي وإداري متكامل ومجرب للتشغيل الفوري من شركة مزايا للبرمجيات.`;
 
   return {
-    title: `${module.title} — ${module.badge} | مزايا للبرمجيات`,
-    description: module.heroSubtitle,
+    title,
+    description,
+    keywords: [
+      module.title,
+      module.badge,
+      "شركة مزايا للبرمجيات",
+      "برنامج كاشير مزايا",
+      "برامج حسابات ومخازن",
+      "الفاتورة الإلكترونية",
+      "برنامج ERP",
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "مزايا للبرمجيات",
+      locale: "ar_EG",
+      type: "website",
+      images: [
+        {
+          url: "/logo.png",
+          width: 1200,
+          height: 630,
+          alt: `${module.title} | شركة مزايا للبرمجيات`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/logo.png"],
+    },
     icons: {
       icon: "/favicon-circle.png?v=3",
       shortcut: "/favicon-circle.png?v=3",
@@ -152,8 +192,61 @@ export default function SystemDetailPage({ params }: PageProps) {
     ? VIDEO_TUTORIALS.filter((v) => v.category === "sales" || v.category === "inventory" || v.category === "basic").slice(0, 6)
     : [];
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "الأنظمة المتخصصة",
+        "item": `${SITE_URL}/#systems`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": currentModule.title,
+        "item": `${SITE_URL}/systems/${currentModule.slug}`,
+      },
+    ],
+  };
+
+  const softwareJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": `${currentModule.title} - شركة مزايا للبرمجيات`,
+    "description": currentModule.heroSubtitle,
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows 10, Windows 11, Windows Server",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EGP",
+      "description": "نسخة تجريبية وديمو مجاني",
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "شركة مزايا للبرمجيات",
+      "url": SITE_URL,
+    },
+  };
+
   return (
     <div className="w-full bg-[#F8FAFC]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
       
       {/* Breadcrumb Navigation */}
       <div className="border-b border-slate-200/80 bg-white">

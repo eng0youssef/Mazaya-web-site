@@ -39,13 +39,20 @@ export const metadata: Metadata = {
     apple: "/favicon-circle.png?v=3",
   },
   keywords: [
+    "شركة مزايا للبرمجيات",
     "مزايا للبرمجيات",
+    "شركة مزايا ماكس",
     "برنامج كاشير مزايا",
     "مزايا ماكس",
     "برنامج حسابات ومخازن",
+    "برنامج كاشير ومخازن في مصر",
     "نظام نقاط البيع POS",
     "الفاتورة الإلكترونية والإيصال الإلكتروني",
+    "برنامج الفاتورة الإلكترونية مصلحة الضرائب المصرية",
     "برنامج ERP للمصانع والشركات",
+    "برنامج حسابات للمحلات",
+    "تحميل برنامج كاشير مجاني",
+    "برنامج مبيعات ومشتريات",
     "شاشات كاشير سريعة بالباركود",
     "كارت الصنف وجرد المخازن",
     "برنامج إدارة المحلات والمعارض",
@@ -127,6 +134,22 @@ const jsonLd = {
       "logo": `${SITE_URL}/logo-clean.png`,
       "description": "حلول برمجيات الكاشير، وإدارة المخازن، والأنظمة المحاسبية والـ ERP المتكاملة في مصر والمملكة العربية السعودية.",
       "telephone": "+201000503370",
+      "email": "info@mazaya-soft.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "EG",
+        "addressRegion": "Cairo",
+        "description": "جمهورية مصر العربية والمملكة العربية السعودية"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
       "contactPoint": [
         {
           "@type": "ContactPoint",
