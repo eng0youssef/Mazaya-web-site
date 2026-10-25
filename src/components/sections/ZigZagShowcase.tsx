@@ -96,7 +96,7 @@ export default function ZigZagShowcase() {
           <div data-aos="fade-left" data-aos-duration="800" className="col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#0A507A]/10 text-[#0A507A] text-xs font-bold">
               <Clock className="w-3.5 h-3.5 text-[#F2C12E]" />
-              <span>سرعة متناهية في نقاط البيع (POS)</span>
+              <span>دقة متناهية في تسجيل الفواتير</span>
             </div>
 
             <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight">
@@ -109,10 +109,10 @@ export default function ZigZagShowcase() {
 
             <div className="space-y-3 pt-2">
               {[
-                "دعم كامل لكل طابعات الفواتير الحرارية (80mm و 58mm) وطابعات A4.",
-                "قراءة فورية لباركود الوزن من موازين الأجبان واللحوم الإلكترونية.",
-                "إمكانية تعليق الفاتورة والانتقال لعميل آخر دون فقدان الأصناف.",
-                "تقفيل وردية الكاشير وجرد الدرج واكتشاف أي عجز أو زيادة في النقدية فوراً.",
+                "دعم كامل لكل طابعات الفواتير الحرارية (80mm و 58mm) وطابعات A4 و A5.",
+                "قراءة فورية لأسكانر الباركود.",
+                "إمكانية تحويل عرض السعر إلى فاتورة بضغطة زرار واحدة.",
+                "تقدر تعمل كشف حساب تفصيلي للعميل وتعرف كل معاملاته على السيستم.",
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -158,11 +158,11 @@ export default function ZigZagShowcase() {
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-2xs" />
                   <span className="font-bold text-slate-800 ms-2 flex items-center gap-1.5">
                     <FileSpreadsheet className="w-4 h-4 text-[#0A507A]" />
-                    <span>تقرير كارت الصنف الرسمي — نظام مزايا ماكس</span>
+                    <span>تقرير كارت الصنف — مزايا ماكس</span>
                   </span>
                 </div>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
-                  حركة بالثانية
+                  دقة متناهية
                 </span>
               </div>
 
@@ -171,15 +171,15 @@ export default function ZigZagShowcase() {
                 <div 
                   onClick={() => setZoomedImage({
                     src: "/screenshots/mazaya-item-card-report.png",
-                    title: "تقرير كارت الصنف التفصيلي — نظام مزايا ماكس",
-                    subtitle: "معاينة تفصيلية عالية الدقة لحركة الوارد والصادر وتتبع أرصدة المخازن بالثانية"
+                    title: "تقرير كارت الصنف — مزايا ماكس",
+                    subtitle: "معاينة تفصيلية لحركة الوارد والصادر وتتبع أرصدة الصنف"
                   })}
                   className="mb-4 bg-white rounded-2xl p-2 border border-slate-200 shadow-sm overflow-hidden cursor-zoom-in relative group/zoom"
-                  title="اضغط في أي مكان لتكبير التقرير بدقة كاملة"
+                  title="اضغط في أي مكان لتكبير التقرير"
                 >
                   <img
                     src="/screenshots/mazaya-item-card-report.png"
-                    alt="تقرير كارت الصنف التفصيلي في نظام مزايا ماكس"
+                    alt="تقرير كارت الصنف في مزايا ماكس"
                     className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
                     loading="lazy"
                     decoding="async"
@@ -192,12 +192,12 @@ export default function ZigZagShowcase() {
                       e.stopPropagation();
                       setZoomedImage({
                         src: "/screenshots/mazaya-item-card-report.png",
-                        title: "تقرير كارت الصنف التفصيلي — نظام مزايا ماكس",
-                        subtitle: "معاينة تفصيلية عالية الدقة لحركة الوارد والصادر وتتبع أرصدة المخازن بالثانية"
+                        title: "تقرير كارت الصنف — مزايا ماكس",
+                        subtitle: "معاينة تفصيلية لحركة الوارد والصادر وتتبع أرصدة الصنف"
                       });
                     }}
                     className="absolute bottom-3 start-3 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-md transition-all hover:scale-105 cursor-pointer"
-                    title="اضغط لتكبير التقرير بدقة كاملة"
+                    title="اضغط لتكبير التقرير"
                   >
                     <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
                     <span>تكبير التقرير</span>
@@ -230,7 +230,7 @@ export default function ZigZagShowcase() {
                 <div className="mt-3.5 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center gap-2.5 text-xs text-emerald-900">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span className="text-xs leading-relaxed">
-                    <strong>دقة رقابية 100%:</strong> تتبع تاريخ كل حركة (بيع، شراء، رصيد افتتاحي) برقم الفاتورة واسم العميل والمورد بالثانية.
+                    <strong>دقة 100%:</strong> تتبع تاريخ كل حركة (بيع، شراء، رصيد افتتاحي) برقم الفاتورة واسم العميل والمورد بالثانية.
                   </span>
                 </div>
               </div>
@@ -241,23 +241,23 @@ export default function ZigZagShowcase() {
           <div data-aos="fade-right" data-aos-duration="800" className="col-span-6 order-2 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#F2C12E]/15 text-[#946c00] text-xs font-bold">
               <Boxes className="w-3.5 h-3.5 text-[#0A507A]" />
-              <span>رقابة وجرد مخازن صارم</span>
+              <span>اعرف كل حركات الصنف</span>
             </div>
 
             <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight">
-              سيطرة كاملة على مخازنك ومنع العجز والسرقة تماماً
+              سيطرة كاملة على مخازنك ومعرفة الصادر و الوارد بكل سهولة
             </h3>
 
             <p className="text-slate-600 text-base leading-relaxed">
-              المخزن هو رأس مالك الحقيقي؛ مع سيستم مخازن مزايا هتعرف حركة كل صنف بالثانية، الرصيد الفعلي في كل فرع، وتكلفة الشراء الفعلية عشان تحافظ على فلوسك وتضمن عدم تسريب أو عجز أي بضاعة.
+              المخزن هو رأس مالك الحقيقي؛ مع سيستم مزايا ماكس هتعرف حركة كل صنف بالتفصيل، الرصيد الفعلي في كل فرع، وتكلفة الشراء الفعلية عشان تحافظ على فلوسك وكمان تعرف متوسط التكلفة.
             </p>
 
             <div className="space-y-3 pt-2">
               {[
-                "كارتة صنف تفصيلية تتبع مسار القطعة من أمر الشراء وحتى بيعها.",
+                "كارت صنف تفصيلي تتبع مسار القطعة من أمر الشراء وحتى بيعها.",
                 "تنبيهات فورية عند وصول أي منتج لحد النواقص لتجهيز طلب الشراء.",
-                "أذون إضافة وصرف وتحويل بين المخازن مع موافقة أمين المخزن.",
-                "إجراء الجرد السنوي والدوري بسهولة تامة باستخدام أجهزة الباركود.",
+                "أذون إضافة وصرف وتحويل بين المخازن.",
+                "تقدر تعمل إقفال سنة عشان تقفل أرصدتك وتقدر ترجعلها تراجع منها.",
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -268,16 +268,6 @@ export default function ZigZagShowcase() {
                   </span>
                 </div>
               ))}
-            </div>
-
-            <div className="pt-4">
-              <Link
-                href="/systems/mazaya-max"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#0A507A] hover:text-[#06324D] transition group"
-              >
-                <span>شاهد إمكانيات موديول المخازن والأصناف</span>
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
-              </Link>
             </div>
           </div>
 
@@ -317,16 +307,6 @@ export default function ZigZagShowcase() {
                   </span>
                 </div>
               ))}
-            </div>
-
-            <div className="pt-4">
-              <Link
-                href="/systems/mazaya-max"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#0A507A] hover:text-[#06324D] transition group"
-              >
-                <span>تعرف على موديول الخزينة والحسابات العامة</span>
-                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1.5 transition-transform" />
-              </Link>
             </div>
           </div>
 

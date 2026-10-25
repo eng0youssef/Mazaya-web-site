@@ -13,7 +13,8 @@ import {
   Bike, 
   ArrowLeft, 
   CheckCircle2, 
-  Sparkles 
+  Sparkles,
+  Star
 } from "lucide-react";
 import { SYSTEM_MODULES } from "@/data/mazaya-data";
 
@@ -68,8 +69,7 @@ export default function SystemsBentoGrid() {
         
         {/* Section Header */}
         <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-soft">
-            <Sparkles className="w-4 h-4 text-[#F2C12E]" />
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 shadow-soft">
             <span className="text-xs sm:text-sm font-bold text-slate-200">
               أنظمة برمجية متخصصة لكل قطاع تجاري وصناعي
             </span>
@@ -86,87 +86,139 @@ export default function SystemsBentoGrid() {
 
         {/* 8-Card Bento Grid with Dynamic Spotlight Borders (Dark Glassmorphism) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SYSTEM_MODULES.map((module, idx) => (
-            <div
-              key={module.id}
-              data-aos="fade-up"
-              data-aos-delay={(idx % 4) * 80}
-              onMouseMove={handleMouseMove}
-              className="group relative rounded-3xl p-[1px] bg-slate-800/80 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_50px_-10px_rgba(10,80,122,0.4)] transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-default hover:-translate-y-1"
-            >
-              {/* Dynamic Spotlight Border Beam */}
-              <div
-                className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
-                style={{
-                  background: `radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), #F2C12E 0%, #0A507A 50%, transparent 80%)`,
-                }}
-              />
+          {SYSTEM_MODULES.map((module, idx) => {
+            const isFeatured = module.slug === "mazaya-max";
 
-              {/* Inner Dark Surface */}
-              <div className="relative z-10 bg-[#0F172A]/90 group-hover:bg-[#111C33]/95 backdrop-blur-md rounded-[23px] p-6 flex-1 flex flex-col justify-between overflow-hidden border border-white/5 transition-colors duration-300">
-                
-                {/* Subtle Inner Ambient Glow following mouse */}
+            return (
+              <div
+                key={module.id}
+                data-aos="fade-up"
+                data-aos-delay={(idx % 4) * 80}
+                onMouseMove={handleMouseMove}
+                className={`group relative rounded-3xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-default hover:-translate-y-1.5 ${
+                  isFeatured
+                    ? "p-[2px] bg-gradient-to-b from-[#F2C12E] via-[#DEAA20]/80 to-[#0A507A] shadow-[0_0_35px_-5px_rgba(242,193,46,0.35),0_20px_50px_-10px_rgba(10,80,122,0.6)] ring-1 ring-[#F2C12E]/50"
+                    : "p-[1px] bg-slate-800/80 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_50px_-10px_rgba(10,80,122,0.4)]"
+                }`}
+              >
+                {/* Dynamic Spotlight Border Beam */}
                 <div
-                  className="pointer-events-none absolute inset-0 rounded-[23px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
                   style={{
-                    background: `radial-gradient(220px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(242, 193, 46, 0.08), transparent 70%)`,
+                    background: `radial-gradient(280px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), #F2C12E 0%, #0A507A 50%, transparent 80%)`,
                   }}
                 />
 
-                {/* Large Watermark Number */}
-                <span className="absolute top-2 end-4 font-mono font-black text-6xl text-slate-800/40 group-hover:text-amber-400/10 transition-colors pointer-events-none select-none z-0">
-                  {module.number}
-                </span>
+                {/* Inner Dark Surface */}
+                <div
+                  className={`relative z-10 backdrop-blur-md rounded-[22px] p-6 flex-1 flex flex-col justify-between overflow-hidden transition-colors duration-300 ${
+                    isFeatured
+                      ? "bg-gradient-to-b from-[#0F2236] to-[#0A1626] border border-[#F2C12E]/25"
+                      : "bg-[#0F172A]/90 group-hover:bg-[#111C33]/95 border border-white/5"
+                  }`}
+                >
+                  {/* Subtle Inner Ambient Glow following mouse */}
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-[22px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                    style={{
+                      background: `radial-gradient(220px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(242, 193, 46, 0.08), transparent 70%)`,
+                    }}
+                  />
 
-                {/* Card Content Top */}
-                <div className="relative z-10">
-                  {/* Icon & Badge */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0A507A]/50 to-[#06324D]/80 text-[#F2C12E] border border-[#0A507A]/80 flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-105 group-hover:from-[#0A507A] group-hover:to-[#0A507A]">
-                      {iconMap[module.iconName] || <ShoppingCart className="w-6 h-6" />}
+                  {/* Ambient Gold Glow inside Featured Card */}
+                  {isFeatured && (
+                    <div
+                      aria-hidden="true"
+                      className="absolute -top-10 -end-10 w-44 h-44 bg-[#F2C12E]/15 rounded-full blur-2xl pointer-events-none"
+                    />
+                  )}
+
+                  {/* Card Content Top */}
+                  <div className="relative z-10">
+                    {/* Icon & Badge */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md group-hover:scale-105 ${
+                          isFeatured
+                            ? "bg-gradient-to-br from-[#0A507A] via-[#0E3550] to-[#0A507A] text-[#F2C12E] border-2 border-[#F2C12E] shadow-[0_0_20px_rgba(242,193,46,0.35)]"
+                            : "bg-gradient-to-br from-[#0A507A]/50 to-[#06324D]/80 text-[#F2C12E] border border-[#0A507A]/80 group-hover:from-[#0A507A] group-hover:to-[#0A507A]"
+                        }`}
+                      >
+                        {iconMap[module.iconName] || <ShoppingCart className="w-6 h-6" />}
+                      </div>
+
+                      {isFeatured ? (
+                        <span className="text-xs font-bold text-slate-950 bg-[#F2C12E] hover:bg-[#DEAA20] px-3 py-1.5 rounded-full shadow-md border border-[#F2C12E]/60 flex items-center gap-1.5 transition-colors">
+                          <Star className="w-3.5 h-3.5 fill-slate-950 text-slate-950 flex-shrink-0" />
+                          <span>الأكثر طلباً واعتماداً</span>
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-bold text-slate-300 bg-slate-800/90 group-hover:bg-[#F2C12E]/15 group-hover:text-[#F2C12E] px-2.5 py-1 rounded-full transition-colors border border-slate-700/80">
+                          {module.badge}
+                        </span>
+                      )}
                     </div>
-                    <span className="text-[11px] font-bold text-slate-300 bg-slate-800/90 group-hover:bg-[#F2C12E]/15 group-hover:text-[#F2C12E] px-2.5 py-1 rounded-full transition-colors border border-slate-700/80">
-                      {module.badge}
-                    </span>
+
+                    {/* Title */}
+                    <h3
+                      className={`text-base sm:text-lg font-black transition-colors mb-2 ${
+                        isFeatured
+                          ? "text-[#F2C12E]"
+                          : "text-white group-hover:text-[#F2C12E]"
+                      }`}
+                    >
+                      {module.title}
+                    </h3>
+
+                    {/* Short Description */}
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                      {module.shortDesc}
+                    </p>
+
+                    {/* Highlight Checkmarks */}
+                    <ul className="space-y-1.5 mb-6 text-xs text-slate-300">
+                      {module.keyBenefits.slice(0, 2).map((benefit, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2
+                            className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                              isFeatured ? "text-[#F2C12E]" : "text-emerald-400"
+                            }`}
+                          />
+                          <span className="line-clamp-1">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#F2C12E] transition-colors mb-2">
-                    {module.title}
-                  </h3>
+                  {/* Card Footer Link / Action Button */}
+                  {isFeatured ? (
+                    <div className="relative z-10 pt-4 border-t border-[#F2C12E]/20">
+                      <Link
+                        href={`/systems/${module.slug}`}
+                        className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm shadow-gold transition-all hover:scale-[1.02] border border-[#F2C12E] group/btn"
+                      >
+                        <span>تفاصيل النظام</span>
+                        <ArrowLeft className="w-4 h-4 text-slate-950 group-hover/btn:-translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="relative z-10 pt-4 border-t border-slate-800/90 flex items-center justify-end">
+                      <Link
+                        href={`/systems/${module.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F2C12E] hover:text-white transition group/link"
+                      >
+                        <span>تفاصيل النظام</span>
+                        <ArrowLeft className="w-3.5 h-3.5 group-hover/link:-translate-x-1 transition-transform text-[#F2C12E]" />
+                      </Link>
+                    </div>
+                  )}
 
-                  {/* Short Description */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                    {module.shortDesc}
-                  </p>
-
-                  {/* Highlight Checkmarks */}
-                  <ul className="space-y-1.5 mb-6 text-xs text-slate-300">
-                    {module.keyBenefits.slice(0, 2).map((benefit, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="line-clamp-1">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Subtle bottom accent line */}
+                  <div className="absolute bottom-0 start-0 w-0 group-hover:w-full h-1 bg-gradient-to-r from-[#0A507A] via-[#0284C7] to-[#F2C12E] transition-all duration-300 z-10" />
                 </div>
-
-                {/* Card Footer Link */}
-                <div className="relative z-10 pt-4 border-t border-slate-800/90 flex items-center justify-end">
-                  <Link
-                    href={`/systems/${module.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F2C12E] hover:text-white transition group/link"
-                  >
-                    <span>تفاصيل النظام</span>
-                    <ArrowLeft className="w-3.5 h-3.5 group-hover/link:-translate-x-1 transition-transform text-[#F2C12E]" />
-                  </Link>
-                </div>
-
-                {/* Subtle bottom accent line */}
-                <div className="absolute bottom-0 start-0 w-0 group-hover:w-full h-1 bg-gradient-to-r from-[#0A507A] via-[#0284C7] to-[#F2C12E] transition-all duration-300 z-10" />
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Global systems prompt callout (Elevated VIP Banner with Gold Accents) */}
