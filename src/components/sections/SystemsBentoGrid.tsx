@@ -13,7 +13,6 @@ import {
   Bike, 
   ArrowLeft, 
   CheckCircle2, 
-  Sparkles,
   Star
 } from "lucide-react";
 import { SYSTEM_MODULES } from "@/data/mazaya-data";
@@ -233,8 +232,7 @@ export default function SystemsBentoGrid() {
           />
 
           <div className="space-y-2 text-center md:text-start relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[#F2C12E] text-xs font-bold w-fit mx-auto md:mx-0">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[#F2C12E] text-xs font-bold w-fit mx-auto md:mx-0">
               <span>تفصيل وبرمجة مخصصة (Custom ERP)</span>
             </div>
             <h4 className="text-xl sm:text-2xl font-black">

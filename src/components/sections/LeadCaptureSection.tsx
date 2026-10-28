@@ -17,11 +17,21 @@ export default function LeadCaptureSection() {
   const [formData, setFormData] = useState({
     businessName: "",
     contactName: "",
+    activity: "",
+    address: "",
     phone: "",
     systemInterest: "mazaya-max",
-    branchesCount: "فرع واحد",
+    branchesCount: "فرع واحد (نقطة بيع واحدة)",
     notes: "",
   });
+
+  const [errors, setErrors] = useState<{
+    businessName?: string;
+    contactName?: string;
+    activity?: string;
+    address?: string;
+    phone?: string;
+  }>({});
 
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -31,28 +41,85 @@ export default function LeadCaptureSection() {
     ? "تفصيل وبرمجة سيستم مخصص (Custom ERP)"
     : SYSTEM_MODULES.find(m => m.slug === formData.systemInterest)?.title || "نظام مزايا ماكس ERP";
 
+  // Convert Arabic digits (٠-٩) to English digits (0-9)
+  const normalizeDigits = (str: string) => {
+    return str.replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d).toString());
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Clear individual field error if exists
+    if (errors[field as keyof typeof errors]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field as keyof typeof errors];
+        return next;
+      });
+    }
+
+    if (formError) setFormError(null);
+  };
+
+  const validateForm = () => {
+    const newErrors: typeof errors = {};
+
+    // 1. Business Name
+    if (!formData.businessName.trim()) {
+      newErrors.businessName = "يرجى كتابة اسم المنشأة أو المحل";
+    } else if (formData.businessName.trim().length < 2) {
+      newErrors.businessName = "اسم المنشأة يجب أن يكون حرفين على الأقل";
+    }
+
+    // 2. Contact Name
+    if (!formData.contactName.trim()) {
+      newErrors.contactName = "يرجى كتابة اسم المسؤول للتواصل";
+    } else if (formData.contactName.trim().length < 2) {
+      newErrors.contactName = "اسم المسؤول يجب أن يكون حرفين على الأقل";
+    }
+
+    // 3. Activity (النشاط)
+    if (!formData.activity.trim()) {
+      newErrors.activity = "يرجى كتابة نوع النشاط (مثال: محل أدوات صحية)";
+    } else if (formData.activity.trim().length < 2) {
+      newErrors.activity = "يرجى تحديد النشاط بشكل صحيح";
+    }
+
+    // 4. Address (العنوان)
+    if (!formData.address.trim()) {
+      newErrors.address = "يرجى كتابة العنوان أو المنطقة (مثال: ابو النمرس - الجيزه)";
+    } else if (formData.address.trim().length < 3) {
+      newErrors.address = "يرجى كتابة العنوان بالتفصيل (المنطقة - المحافظة)";
+    }
+
+    // 5. Phone / WhatsApp
+    const cleanPhone = normalizeDigits(formData.phone.trim().replace(/[\s\-\+]/g, ""));
+    const isEgyptianPhone = /^(?:20|0020)?01[0125][0-9]{8}$/.test(cleanPhone);
+    const isGeneralPhone = /^[0-9]{10,14}$/.test(cleanPhone);
+
+    if (!cleanPhone) {
+      newErrors.phone = "يرجى إدخال رقم الموبايل أو الواتساب";
+    } else if (!isEgyptianPhone && !isGeneralPhone) {
+      newErrors.phone = "يرجى إدخال رقم هاتف صحيح (11 رقماً يبدأ بـ 01)";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
 
-    // Arabic Form Validation
-    if (!formData.businessName.trim() || formData.businessName.trim().length < 2) {
-      setFormError("يرجى كتابة اسم النشاط أو الشركة بشكل صحيح.");
-      return;
-    }
-
-    if (!formData.contactName.trim() || formData.contactName.trim().length < 2) {
-      setFormError("يرجى إدخال اسم المسؤول للتواصل.");
-      return;
-    }
-
-    const cleanPhone = formData.phone.replace(/[\s\-\+]/g, "");
-    if (!cleanPhone || cleanPhone.length < 10 || isNaN(Number(cleanPhone))) {
-      setFormError("يرجى إدخال رقم موبايل صحيح (10-11 رقماً) لنتواصل معك عبر الواتساب أو الهاتف.");
+    // Validate form fields
+    if (!validateForm()) {
+      setFormError("يرجى مراجعة الحقول المطلوبة الموضحة باللون الأحمر.");
       return;
     }
 
     setIsLoading(true);
+
+    const cleanPhone = normalizeDigits(formData.phone.trim().replace(/[\s\-\+]/g, ""));
 
     try {
       const res = await fetch("/api/lead", {
@@ -61,6 +128,8 @@ export default function LeadCaptureSection() {
         body: JSON.stringify({
           companyName: formData.businessName.trim(),
           contactName: formData.contactName.trim(),
+          activity: formData.activity.trim(),
+          address: formData.address.trim(),
           phone: cleanPhone,
           system: selectedModuleName,
           branches: formData.branchesCount,
@@ -173,11 +242,14 @@ export default function LeadCaptureSection() {
                         setFormData({
                           businessName: "",
                           contactName: "",
+                          activity: "",
+                          address: "",
                           phone: "",
                           systemInterest: "mazaya-max",
-                          branchesCount: "فرع واحد",
+                          branchesCount: "فرع واحد (نقطة بيع واحدة)",
                           notes: "",
                         });
+                        setErrors({});
                       }}
                       className="px-7 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition shadow-xs"
                     >
@@ -196,7 +268,7 @@ export default function LeadCaptureSection() {
                     </p>
                   </div>
 
-                  {/* Inline Arabic Validation Error Banner */}
+                  {/* General Validation Error Banner */}
                   {formError && (
                     <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-rose-800 text-xs font-semibold animate-in fade-in duration-200">
                       <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
@@ -204,25 +276,31 @@ export default function LeadCaptureSection() {
                     </div>
                   )}
 
+                  {/* Row 1: Business Name & Contact Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Business Name */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                        اسم النشاط / المنشأة <span className="text-rose-500">*</span>
+                        اسم المنشأة / المحل <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="text"
                         value={formData.businessName}
-                        onChange={(e) => {
-                          setFormData({ ...formData, businessName: e.target.value });
-                          if (formError) setFormError(null);
-                        }}
-                        placeholder="مثال: مصنع الزجاج الحديث أو سوبرماركت الأصدقاء"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
+                        onChange={(e) => handleInputChange("businessName", e.target.value)}
+                        placeholder="مثال: سوبرماركت الأصدقاء، معرض النور..."
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:outline-none transition-all text-slate-800 placeholder-slate-400 bg-white ${
+                          errors.businessName
+                            ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 bg-rose-50/20"
+                            : "border-slate-200 focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10"
+                        }`}
                       />
+                      {errors.businessName && (
+                        <p className="mt-1 text-[11px] text-rose-600 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{errors.businessName}</span>
+                        </p>
+                      )}
                     </div>
 
-                    {/* Contact Person Name */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
                         اسم المسؤول <span className="text-rose-500">*</span>
@@ -230,18 +308,74 @@ export default function LeadCaptureSection() {
                       <input
                         type="text"
                         value={formData.contactName}
-                        onChange={(e) => {
-                          setFormData({ ...formData, contactName: e.target.value });
-                          if (formError) setFormError(null);
-                        }}
+                        onChange={(e) => handleInputChange("contactName", e.target.value)}
                         placeholder="أ / محمد أحمد"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:outline-none transition-all text-slate-800 placeholder-slate-400 bg-white ${
+                          errors.contactName
+                            ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 bg-rose-50/20"
+                            : "border-slate-200 focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10"
+                        }`}
                       />
+                      {errors.contactName && (
+                        <p className="mt-1 text-[11px] text-rose-600 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{errors.contactName}</span>
+                        </p>
+                      )}
                     </div>
                   </div>
 
+                  {/* Row 2: Activity (النشاط) & Address (العنوان) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Phone / WhatsApp */}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        النشاط <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.activity}
+                        onChange={(e) => handleInputChange("activity", e.target.value)}
+                        placeholder="مثال: محل أدوات صحية"
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:outline-none transition-all text-slate-800 placeholder-slate-400 bg-white ${
+                          errors.activity
+                            ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 bg-rose-50/20"
+                            : "border-slate-200 focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10"
+                        }`}
+                      />
+                      {errors.activity && (
+                        <p className="mt-1 text-[11px] text-rose-600 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{errors.activity}</span>
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        العنوان <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange("address", e.target.value)}
+                        placeholder="مثال: ابو النمرس - الجيزه"
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:outline-none transition-all text-slate-800 placeholder-slate-400 bg-white ${
+                          errors.address
+                            ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 bg-rose-50/20"
+                            : "border-slate-200 focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10"
+                        }`}
+                      />
+                      {errors.address && (
+                        <p className="mt-1 text-[11px] text-rose-600 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{errors.address}</span>
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Row 3: Phone / WhatsApp & System Interest */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
                         رقم الموبايل / الواتساب <span className="text-rose-500">*</span>
@@ -250,23 +384,29 @@ export default function LeadCaptureSection() {
                         type="tel"
                         dir="ltr"
                         value={formData.phone}
-                        onChange={(e) => {
-                          setFormData({ ...formData, phone: e.target.value });
-                          if (formError) setFormError(null);
-                        }}
+                        onChange={(e) => handleInputChange("phone", normalizeDigits(e.target.value))}
                         placeholder="010XXXXXXXX"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white text-end font-mono"
+                        className={`w-full px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm focus:outline-none transition-all text-slate-800 placeholder-slate-400 bg-white text-end font-mono ${
+                          errors.phone
+                            ? "border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20 bg-rose-50/20"
+                            : "border-slate-200 focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10"
+                        }`}
                       />
+                      {errors.phone && (
+                        <p className="mt-1 text-[11px] text-rose-600 font-medium flex items-center gap-1 animate-in fade-in duration-150">
+                          <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                          <span>{errors.phone}</span>
+                        </p>
+                      )}
                     </div>
 
-                    {/* System Interest */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
                         اختر النظام المطلوب
                       </label>
                       <select
                         value={formData.systemInterest}
-                        onChange={(e) => setFormData({ ...formData, systemInterest: e.target.value })}
+                        onChange={(e) => handleInputChange("systemInterest", e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 bg-white"
                       >
                         {SYSTEM_MODULES.map((mod) => (
@@ -279,15 +419,15 @@ export default function LeadCaptureSection() {
                     </div>
                   </div>
 
+                  {/* Row 4: Branches Count & Notes */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Number of Branches */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
                         عدد الفروع / نقاط البيع
                       </label>
                       <select
                         value={formData.branchesCount}
-                        onChange={(e) => setFormData({ ...formData, branchesCount: e.target.value })}
+                        onChange={(e) => handleInputChange("branchesCount", e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 bg-white"
                       >
                         <option value="فرع واحد (نقطة بيع واحدة)">فرع واحد (نقطة بيع واحدة)</option>
@@ -297,7 +437,6 @@ export default function LeadCaptureSection() {
                       </select>
                     </div>
 
-                    {/* Additional Note */}
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">
                         ملاحظات إضافية (اختياري)
@@ -305,7 +444,7 @@ export default function LeadCaptureSection() {
                       <input
                         type="text"
                         value={formData.notes}
-                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                        onChange={(e) => handleInputChange("notes", e.target.value)}
                         placeholder="أي تفاصيل خاصة بدورة عملك..."
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-[#0A507A] focus:ring-2 focus:ring-[#0A507A]/10 text-slate-800 placeholder-slate-400 bg-white"
                       />

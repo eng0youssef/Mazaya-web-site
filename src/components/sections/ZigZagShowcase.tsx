@@ -288,15 +288,15 @@ export default function ZigZagShowcase() {
             </h3>
 
             <p className="text-slate-600 text-base leading-relaxed">
-              مش لازم تكون خريج تجارة عشان تفهم حساباتك؛ سجل المصروفات والإيرادات اليومية والبرنامج هيرحل القيود تلقائياً ويديلك صافي أرباحك الحقيقية، كشوف حسابات العملاء والموردين، وحركة الخزينة والبنوك بوضوح تام.
+              مش لازم تكون خريج تجارة عشان تفهم حساباتك؛ سجل المصروفات والإيرادات اليومية والبرنامج يديلك صافي أرباحك الحقيقية، كشوف حسابات العملاء والموردين، وحركة الخزينة والبنوك.
             </p>
 
             <div className="space-y-3 pt-2">
               {[
-                "ترحيل تلقائي للمبيعات والمشتريات للخزينة دون كتابة قيود يدوية.",
-                "شجرة حسابات مصرية قياسية ومرنة جاهزة للاستخدام في دقائق.",
+                "ترحيل تلقائي للمبيعات والمشتريات للخزينة.",
+                "تقدر تعمل كشف حساب للخزينة و تعرف كل حركة تمت عليها بالتفصيل.",
                 "كشف حساب تفصيلي للعميل والمورد يُرسل مباشرة عبر الواتساب.",
-                "تقارير قائمة الدخل وميزان المراجعة والأرباح بالجنيه المصري.",
+                "تقارير قائمة الدخل والمركز المالي والأرباح بالعملة بتاعت بلدك.",
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -322,11 +322,11 @@ export default function ZigZagShowcase() {
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-2xs" />
                   <span className="font-bold text-slate-800 ms-2 flex items-center gap-1.5">
                     <Landmark className="w-4 h-4 text-[#0A507A]" />
-                    <span>تقرير كشف حساب الخزينة — نظام مزايا ماكس</span>
+                    <span>تقرير كشف حساب الخزينة — مزايا ماكس</span>
                   </span>
                 </div>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
-                  توازن ومطابقة 100%
+                  أدق تفاصيل حركات الخزينة
                 </span>
               </div>
 
@@ -335,15 +335,15 @@ export default function ZigZagShowcase() {
                 <div 
                   onClick={() => setZoomedImage({
                     src: "/screenshots/mazaya-treasury-report.png",
-                    title: "تقرير كشف حساب الخزينة والمحافظ (انستا باي) — نظام مزايا ماكس",
-                    subtitle: "معاينة تفصيلية لحركات الوارد والصادر والمصروفات والتحصيلات بالجنيه المصري"
+                    title: "تقرير كشف حساب الخزينة والمحافظ (انستا باي) — مزايا ماكس",
+                    subtitle: "معاينة تفصيلية لحركات الوارد والصادر والمصروفات والتحصيلات"
                   })}
                   className="mb-4 bg-white rounded-2xl p-2 border border-slate-200 shadow-sm overflow-hidden cursor-zoom-in relative group/zoom"
-                  title="اضغط في أي مكان لتكبير كشف الحساب بدقة كاملة"
+                  title="اضغط في أي مكان لتكبير كشف حساب الخزينة"
                 >
                   <img
                     src="/screenshots/mazaya-treasury-report.png"
-                    alt="تقرير كشف حساب الخزينة في نظام مزايا ماكس"
+                    alt="تقرير كشف حساب الخزينة في مزايا ماكس"
                     className="w-full h-auto block rounded-xl select-none group-hover/zoom:scale-[1.01] transition-transform duration-200"
                     loading="lazy"
                     decoding="async"
@@ -356,12 +356,12 @@ export default function ZigZagShowcase() {
                       e.stopPropagation();
                       setZoomedImage({
                         src: "/screenshots/mazaya-treasury-report.png",
-                        title: "تقرير كشف حساب الخزينة والمحافظ (انستا باي) — نظام مزايا ماكس",
-                        subtitle: "معاينة تفصيلية لحركات الوارد والصادر والمصروفات والتحصيلات بالجنيه المصري"
+                        title: "تقرير كشف حساب الخزينة والمحافظ (انستا باي) — مزايا ماكس",
+                        subtitle: "معاينة تفصيلية لحركات الوارد والصادر والمصروفات والتحصيلات"
                       });
                     }}
                     className="absolute bottom-3 start-3 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/85 hover:bg-slate-900 text-white text-xs font-bold border border-white/20 shadow-lg backdrop-blur-md transition-all hover:scale-105 cursor-pointer"
-                    title="اضغط لتكبير كشف الحساب بدقة كاملة"
+                    title="اضغط لتكبير كشف حساب الخزينة"
                   >
                     <ZoomIn className="w-3.5 h-3.5 text-[#F2C12E]" />
                     <span>تكبير كشف الحساب</span>
@@ -394,7 +394,7 @@ export default function ZigZagShowcase() {
                 <div className="mt-3.5 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center gap-2.5 text-xs text-emerald-900">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                   <span className="text-xs leading-relaxed">
-                    <strong>مطابقة بنكية وتزامن فوري:</strong> فواتير الكاشير، المصروفات، ومحافظ انستا باي وفودافون كاش ترحل لحظياً للخزينة بدقة تامة.
+                    <strong>مطابقة الرصيد بالتفصيل:</strong> فواتير الكاشير، المصروفات، ومحافظ انستا باي وفودافون كاش ترحل لحظياً للخزينة بدقة تامة.
                   </span>
                 </div>
               </div>
