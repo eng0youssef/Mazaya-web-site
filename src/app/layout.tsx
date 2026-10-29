@@ -7,6 +7,7 @@ import FloatingWhatsApp from "@/components/sections/FloatingWhatsApp";
 import AOSInit from "@/components/ui/AOSInit";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import MicrosoftClarity from "@/components/MicrosoftClarity";
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
@@ -214,6 +215,7 @@ export default function RootLayout({
         <FloatingWhatsApp />
         <Analytics />
         <SpeedInsights />
+        <MicrosoftClarity />
       </body>
     </html>
   );

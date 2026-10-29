@@ -100,7 +100,7 @@ export const COMPANY_INFO: ContactInfo = {
 };
 
 export const TRUST_METRICS = [
-  { value: "+1200", label: "شركة ونشاط تجاري", subLabel: "يعتمدون على أنظمة مزايا يومياً" },
+  { value: "+5000", label: "شركة ونشاط تجاري", subLabel: "يعتمدون على أنظمة مزايا يومياً" },
   { value: "100%", label: "استقرار ودقة متناهية", subLabel: "مفيش ولا غلطة في الحسابات" },
   { value: "8 أنظمة", label: "حلول تخصصية قطاعية", subLabel: "مصممة خصيصاً لكل مجال عمل" },
   { value: "مباشر", label: "دعم فني وتدريب", subLabel: "عن بعد وحضوري مع شروحات يوتيوب" },
