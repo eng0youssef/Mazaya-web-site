@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -38,6 +38,44 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const megaMenuContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleMenuEnter = () => {
+    if (menuTimeoutRef.current) {
+      clearTimeout(menuTimeoutRef.current);
+      menuTimeoutRef.current = null;
+    }
+    setIsMegaMenuOpen(true);
+  };
+
+  const handleMenuLeave = () => {
+    menuTimeoutRef.current = setTimeout(() => {
+      setIsMegaMenuOpen(false);
+    }, 200);
+  };
+
+  // Close menu on route changes
+  useEffect(() => {
+    setIsMegaMenuOpen(false);
+  }, [pathname]);
+
+  // Close menu on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        megaMenuContainerRef.current &&
+        !megaMenuContainerRef.current.contains(event.target as Node)
+      ) {
+        setIsMegaMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,11 +134,14 @@ export default function Navbar() {
             
             {/* Mega Menu Trigger: الأنظمة الجاهزة */}
             <div 
+              ref={megaMenuContainerRef}
               className="relative"
-              onMouseEnter={() => setIsMegaMenuOpen(true)}
-              onMouseLeave={() => setIsMegaMenuOpen(false)}
+              onMouseEnter={handleMenuEnter}
+              onMouseLeave={handleMenuLeave}
             >
               <button
+                type="button"
+                onClick={() => setIsMegaMenuOpen((prev) => !prev)}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition ${
                   isMegaMenuOpen
                     ? "bg-[#0A507A]/10 text-[#0A507A]"
@@ -111,9 +152,14 @@ export default function Navbar() {
                 <ChevronDown className={`w-4 h-4 transition-transform ${isMegaMenuOpen ? "rotate-180 text-[#0A507A]" : "text-slate-400"}`} />
               </button>
 
-              {/* Mega Dropdown Panel */}
+              {/* Mega Dropdown Panel with Invisible Hover Bridge */}
               {isMegaMenuOpen && (
-                <div className="absolute top-full start-0 mt-2 w-[760px] bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div 
+                  className="absolute top-full start-0 pt-2 w-[760px] z-50"
+                  onMouseEnter={handleMenuEnter}
+                  onMouseLeave={handleMenuLeave}
+                >
+                  <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
                     <div>
                       <h4 className="font-bold text-sm text-slate-900">
@@ -169,6 +215,7 @@ export default function Navbar() {
                       <span>تفصيل وبرمجة مخصصة</span>
                       <ArrowLeft className="w-3.5 h-3.5" />
                     </Link>
+                  </div>
                   </div>
                 </div>
               )}

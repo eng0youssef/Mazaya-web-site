@@ -23,7 +23,6 @@ export default function ReadyVsCustomSection() {
         {/* Section Header */}
         <div data-aos="fade-up" className="text-center max-w-3xl mx-auto space-y-4 mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#0A507A]/15 shadow-soft">
-            <Sparkles className="w-4 h-4 text-[#F2C12E]" />
             <span className="text-xs font-bold text-[#0A507A]">
              برنامج جاهز ولا سيستم متفصل على مقاسك؟
             </span>
@@ -34,7 +33,7 @@ export default function ReadyVsCustomSection() {
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            في مزايا لا نفرض عليك قالباً واحداً؛ نوفر لك برامج جاهزة للتشغيل الفوري في نفس اليوم، أو نقوم ببرمجة وتفصيل نظام ERP متكامل من الصفر ليلائم أدق تفاصيل دورتك التشغيلية.
+            في مزايا لا نفرض عليك قالباً واحداً؛ نوفر لك برامج جاهزة للتشغيل الفوري في نفس اليوم، أو نقوم ببرمجة وتفصيل نظام ERP متكامل من الصفر ليلائم أدق تفاصيل عملك.
           </p>
         </div>
 
@@ -77,6 +76,7 @@ export default function ReadyVsCustomSection() {
                     "المطاعم والكافيهات",
                     "المعارض ومحلات الأدوات الصحية",
                     "شركات التوزيع وتجار الجملة",
+		    "محلات الأدوات المنزلية و الكهربائية",
                     "محلات العدد اليدوية والحدايد",
                   ].map((cat, i) => (
                     <span key={i} className="px-2.5 py-1 rounded-lg bg-white text-slate-700 font-medium border border-slate-200/70">

@@ -5,8 +5,7 @@ import {
   Headphones, 
   Download, 
   MessageCircle, 
-  PhoneCall, 
-  ShieldCheck, 
+  UserCheck, 
   Clock, 
   CheckCircle2, 
   Sparkles,
@@ -34,11 +33,11 @@ export default function SupportHubSection() {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
-            مش بنبيعلك السيستم ونسيبك؛ مهندسو الدعم الفني معاك لحظة بلحظة كل يوم من 10 ص ل 7 م ما عدا يوم الجمعة
+            مش بنبيعلك السيستم ونسيبك؛ مهندسين الدعم الفني معاك لحظة بلحظة كل يوم من 10 ص ل 7 م ما عدا يوم الجمعة
           </h2>
 
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            عارفين إن توقف الكاشير أو السيستم يعني تعطل شغلك وخسارة فلوس؛ عشان كده فريق الدعم الفني في مزايا متاح للتدخل السريع عن بعد أو عبر الهاتف لحل أي استفسار في ثواني معدودة أو عن طريق زيارة لحد عندك.
+            عارفين إن توقف الكاشير أو السيستم يعني تعطل شغلك وخسارة فلوس؛ عشان كده فريق الدعم الفني في مزايا متاح للتدخل السريع عن بعد أو عبر الهاتف لحل أي استفسار في ثواني معدودة أو عن طريق زيارة لحد عندك اذا طلبت.
           </p>
         </div>
 
@@ -71,13 +70,13 @@ export default function SupportHubSection() {
 
           <div data-aos="fade-up" data-aos-delay="300" className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-soft hover:shadow-lg transition-all">
             <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-100">
-              <ShieldCheck className="w-6 h-6" />
+              <UserCheck className="w-6 h-6" />
             </div>
             <h3 className="text-base font-bold text-slate-900 mb-2">
-              حماية البيانات ونسخ احتياطي
+              تدريب وتأهيل كامل لفريق عملك
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              نساعدك في إعداد النسخ الاحتياطي التلقائي اليومي لقاعدة بيانات نشاطك لضمان عدم ضياع أي فاتورة بيع أو كشف حساب حتى في حال تعطل جهاز الكمبيوتر.
+              ندرب الكاشير والمحاسبين ومديري المخازن على استخدام النظام باحترافية من أول يوم، وبنفضل معاهم خطوة بخطوة حتى استيعاب كل شاشة والاعتماد الكامل على السيستم.
             </p>
           </div>
 
@@ -85,8 +84,8 @@ export default function SupportHubSection() {
 
         {/* Remote Support Quick Download Portal */}
         <div data-aos="fade-up" data-aos-delay="150" className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
-            <div className="space-y-1 text-center lg:text-start">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="space-y-1.5 text-center lg:text-start">
               <div className="flex items-center justify-center lg:justify-start gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
@@ -101,48 +100,40 @@ export default function SupportHubSection() {
               </p>
             </div>
 
-            {/* Direct Download Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={COMPANY_INFO.remoteSupport.anydeskUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs sm:text-sm border border-rose-200 transition shadow-soft"
-              >
-                <Download className="w-4 h-4 text-rose-600" />
-                <span>تحميل AnyDesk للويندوز</span>
-              </a>
+            {/* Action Buttons: Remote Tools & WhatsApp Support */}
+            <div className="flex flex-col items-center gap-3 w-full sm:w-auto flex-shrink-0">
+              <div className="flex flex-wrap items-center justify-center gap-3 w-full">
+                <a
+                  href={COMPANY_INFO.remoteSupport.anydeskUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs sm:text-sm border border-rose-200 transition shadow-soft flex-1 sm:flex-initial"
+                >
+                  <Download className="w-4 h-4 text-rose-600" />
+                  <span>تحميل AnyDesk للويندوز</span>
+                </a>
+
+                <a
+                  href={COMPANY_INFO.remoteSupport.teamviewerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0A507A] font-bold text-xs sm:text-sm border border-sky-200 transition shadow-soft flex-1 sm:flex-initial"
+                >
+                  <Download className="w-4 h-4 text-[#0A507A]" />
+                  <span>تحميل TeamViewer</span>
+                </a>
+              </div>
 
               <a
-                href={COMPANY_INFO.remoteSupport.teamviewerUrl}
+                href={supportWaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0A507A] font-bold text-xs sm:text-sm border border-sky-200 transition shadow-soft"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm transition shadow-soft hover:shadow-md"
               >
-                <Download className="w-4 h-4 text-[#0A507A]" />
-                <span>تحميل TeamViewer</span>
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>تواصل مع مهندس الدعم الفني على واتساب</span>
               </a>
             </div>
-          </div>
-
-          {/* Contact Bar */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <div className="flex items-center gap-2 text-slate-600">
-              <PhoneCall className="w-4 h-4 text-[#0A507A]" />
-              <span>
-                خط الدعم الفني المباشر: <strong>{COMPANY_INFO.phones.support}</strong>
-              </span>
-            </div>
-
-            <a
-              href={supportWaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition shadow-soft"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>تواصل مع مهندس الدعم الفني على واتساب</span>
-            </a>
           </div>
         </div>
 

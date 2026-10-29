@@ -6,7 +6,8 @@ import {
   SYSTEM_MODULES, 
   VIDEO_TUTORIALS, 
   COMPANY_INFO, 
-  SystemModule 
+  SystemModule,
+  VideoTutorial
 } from "@/data/mazaya-data";
 import SystemRelatedVideos from "@/components/sections/SystemRelatedVideos";
 import { 
@@ -60,7 +61,8 @@ import {
   Palmtree,
   Bike,
   Layers,
-  Barcode
+  Barcode,
+  Globe
 } from "lucide-react";
 
 interface PageProps {
@@ -185,11 +187,23 @@ export default function SystemDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  // Selected featured videos for Mazaya Max
+  const mazayaMaxFeaturedVideoIds = [
+    "X0mdQtelSdk", // 1. فيديو الهوك ونظرة عامة على مزايا ماكس
+    "HMh0sv441YI", // 2. فيديو فاتورة المبيعات والكاشير (D01)
+    "LiFoLHeyJIM", // 3. فيديو أوامر التصنيع والتشغيل (E01)
+    "D_neGmohWU4", // 4. فيديو البيع بالتقسيط (D11)
+    "M2CH59FEUNE", // 5. فيديو فواتير المشتريات (C01)
+    "JWoxyVqdMSw", // 6. فيديو ازاي نسجل صنف وبيانات الأصناف (A07)
+  ];
+
   // Related videos
   const relatedVideos = currentModule.slug === "mazaya-gym"
     ? VIDEO_TUTORIALS.filter((v) => v.category === "gym")
     : currentModule.slug === "mazaya-max"
-    ? VIDEO_TUTORIALS.filter((v) => v.category === "sales" || v.category === "inventory" || v.category === "basic").slice(0, 6)
+    ? mazayaMaxFeaturedVideoIds
+        .map((ytId) => VIDEO_TUTORIALS.find((v) => v.youtubeId === ytId))
+        .filter((v): v is VideoTutorial => Boolean(v))
     : [];
 
   const breadcrumbJsonLd = {
@@ -350,7 +364,7 @@ export default function SystemDetailPage({ params }: PageProps) {
         
         <div data-aos="fade-up" className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-            أدق التفاصيل التشغيلية المصممة لواقع العمل في مصر
+            أدق التفاصيل التشغيلية المصممة لواقع العمل في مصر والدول العربية
           </h2>
           <p className="text-sm text-slate-600">
             كل شاشة وكل تقرير في نظام {currentModule.title} تم تصميمه بعناية فائقة لتنظيم دورة العمل ومنع أي أخطاء.
@@ -379,6 +393,138 @@ export default function SystemDetailPage({ params }: PageProps) {
         </div>
 
       </section>
+
+      {/* Mobile App Feature Showcase (Exclusively for Mazaya Max) */}
+      {currentModule.slug === "mazaya-max" && (
+        <section className="pb-16 lg:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            data-aos="fade-up"
+            className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#061826] via-[#0A2E46] to-[#0A507A] text-white p-6 sm:p-10 lg:p-12 border-2 border-[#F2C12E]/30 shadow-[0_25px_60px_-15px_rgba(10,80,122,0.5)]"
+          >
+            {/* Ambient Background Glows */}
+            <div 
+              aria-hidden="true" 
+              className="absolute -top-24 -end-24 w-96 h-96 bg-[#F2C12E]/15 rounded-full blur-3xl pointer-events-none" 
+            />
+            <div 
+              aria-hidden="true" 
+              className="absolute -bottom-24 -start-24 w-96 h-96 bg-[#0284C7]/20 rounded-full blur-3xl pointer-events-none" 
+            />
+
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Text & Value Props */}
+              <div className="lg:col-span-7 space-y-6">
+                
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#F2C12E]/40 text-[#F2C12E] text-xs font-bold w-fit">
+                  <Smartphone className="w-4 h-4 text-[#F2C12E]" />
+                  <span>متاح الآن: تطبيق الموبايل (Mazaya Mobile App)</span>
+                </div>
+
+                {/* Headline */}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight tracking-tight">
+                  شغلك وفواتيرك في جيبك.. تابع نشاطك <span className="text-[#F2C12E]">من أي مكان في العالم</span>
+                </h2>
+
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl">
+                  تحكم في مبيعاتك ببساطة وبدون أي تعقيدات؛ يتيح لك التطبيق إصدار فواتير بيع فورية ومشاركتها لعملائك، متابعة الخزينة، مراقبة المخزون، وحساب صافي أرباحك في أي وقت ومن أي مكان.
+                </p>
+
+                {/* 4 Feature Points */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                  <div className="flex items-start gap-3 bg-white/5 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                    <div className="w-8 h-8 rounded-xl bg-[#F2C12E]/20 text-[#F2C12E] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Receipt className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-0.5">إصدار ومشاركة الفواتير</h4>
+                      <p className="text-xs text-slate-300">اعمل فاتورة بيع من موبايلك وشاركها مباشرة للعميل عبر واتساب.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-white/5 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                    <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <BarChart3 className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-0.5">متابعة الخزينة والمبيعات</h4>
+                      <p className="text-xs text-slate-300">تقارير حية بإجمالي مبيعات اليوم وأرصدة الصناديق في ثوانٍ.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-white/5 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                    <div className="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Boxes className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-0.5">استعلام أرصدة المخازن</h4>
+                      <p className="text-xs text-slate-300">ابحث عن أسعار وكميات الأصناف المتوفرة بكل الفروع في أي وقت.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 bg-white/5 backdrop-blur-sm p-3.5 rounded-2xl border border-white/10">
+                    <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <TrendingUp className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-0.5">حساب ومتابعة الأرباح</h4>
+                      <p className="text-xs text-slate-300">معرفة أرباح مبيعاتك وصافي الدخل بدقة وبساطة لاتخاذ قراراتك فوراً.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <a
+                    href={`https://wa.me/${COMPANY_INFO.whatsapp.sales}?text=${encodeURIComponent(
+                      "أهلاً مزايا، محتاج تفاصيل وتجربة تطبيق الموبايل لنظام مزايا ماكس"
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#F2C12E] hover:bg-[#DEAA20] active:scale-95 text-slate-950 font-black text-sm shadow-[0_10px_25px_-5px_rgba(242,193,46,0.5)] transition-all hover:scale-105"
+                  >
+                    <Smartphone className="w-4 h-4 text-slate-950" />
+                    <span>طلب تفعيل تطبيق الموبايل</span>
+                  </a>
+                  <span className="text-xs text-slate-300 font-medium">
+                    يدعم أجهزة Android و iPhone (قريباً)
+                  </span>
+                </div>
+
+              </div>
+
+              {/* Real Mobile App Screenshot Showcase */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-[270px] sm:max-w-[290px] rounded-[42px] p-2.5 sm:p-3 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-950 border-[3px] border-slate-600/70 shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(242,193,46,0.2)] group hover:scale-[1.02] transition-all duration-300">
+                  {/* Phone Speaker Notch */}
+                  <div className="w-20 h-3.5 bg-slate-900 rounded-full mx-auto mb-2.5 border border-slate-700/60 flex items-center justify-center">
+                    <div className="w-2.5 h-2.5 rounded-full bg-slate-950" />
+                  </div>
+
+                  {/* Real Mobile App Screenshot Container */}
+                  <div className="relative overflow-hidden rounded-[30px] bg-emerald-950/40 border border-white/10 shadow-inner">
+                    <img
+                      src="/screenshots/mazaya-mobile-app.jpg"
+                      alt="شاشة تطبيق مزايا ماكس للموبايل"
+                      className="w-full h-auto block select-none rounded-[30px]"
+                      loading="eager"
+                      decoding="async"
+                    />
+
+                    {/* Subtle Overlay Depth */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-white/5 rounded-[30px]" />
+                  </div>
+
+                  {/* Phone Bottom Home Indicator */}
+                  <div className="w-28 h-1 bg-white/20 rounded-full mx-auto mt-2.5" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Related Video Tutorials (Interactive with modal) */}
       <SystemRelatedVideos
