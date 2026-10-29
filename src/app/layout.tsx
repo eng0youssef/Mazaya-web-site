@@ -8,6 +8,7 @@ import AOSInit from "@/components/ui/AOSInit";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import MicrosoftClarity from "@/components/MicrosoftClarity";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
@@ -193,6 +194,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <html lang="ar" dir="rtl" className={ibmPlexArabic.variable}>
       <head>
@@ -217,6 +220,9 @@ export default function RootLayout({
         <SpeedInsights />
         <MicrosoftClarity />
       </body>
+      {gaId && process.env.NODE_ENV === "production" && (
+        <GoogleAnalytics gaId={gaId} />
+      )}
     </html>
   );
 }
